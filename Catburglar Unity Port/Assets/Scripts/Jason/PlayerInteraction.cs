@@ -25,6 +25,10 @@ public class PlayerInteraction : MonoBehaviour
         if (currentInteractable != null)
         {
             interactText.text = currentInteractable.InteractionText;
+            if (!CheckIfInteractable())
+            {
+                uiObject.SetActive(false);
+            }
         }
     }
 
@@ -40,12 +44,44 @@ public class PlayerInteraction : MonoBehaviour
 
     void OnTriggerStay2D(Collider2D other)
     {
-        // This is a catch for if the player is moved but still in a trigger
         var interactable = other.GetComponent<IInteractable>();
-        if (interactable != null && !uiShown)
+        if (interactable != null)
         {
-            ShowHideUI();
+            // This is a catch for if the player is moved but still in a trigger
+            if (!uiShown)
+            {
+                ShowHideUI();
+            }
+            // This stops the player from interacting with the same object repeatedly
+            if (!CheckIfInteractable())
+            {
+                uiObject.SetActive(false);
+            }
         }
+    }
+
+    bool CheckIfInteractable()
+    {
+        var searchObj = currentInteractable.Object.GetComponent<SearchObject>();
+        if (searchObj != null)
+        {
+            if (searchObj.doneInteracting == true)
+            {
+                return false;
+            }
+        }
+        else
+        {
+            var hackObj = currentInteractable.Object.GetComponent<HackObject>();
+            if (hackObj != null)
+            {
+                if (hackObj.doneInteracting == true)
+                {
+                    return false;
+                }
+            }
+        }
+        return true;
     }
 
     void OnTriggerExit2D(Collider2D other)

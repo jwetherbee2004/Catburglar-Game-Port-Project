@@ -4,6 +4,7 @@ public class Gate : MonoBehaviour, IInteractable
 {
     public string InteractionText => "Enter";
     [SerializeField] Gate connectedGate;
+    public GameObject Object => gameObject;
 
     public void Interact(PlayerInteraction player)
     {
