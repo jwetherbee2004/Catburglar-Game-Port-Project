@@ -9,8 +9,12 @@ public class PlayerMovement : MonoBehaviour
     public float rollDistance = 8f;
     public float rollDuration = 1.5f;
     
+    public LayerMask groundLayer;
+    public float groundCheckDistance = 0.5f;
+    
     private float rollTimer = 0f;
     private float rollDirection = 0f;
+    private bool isGrounded = false;
 
     void Start()
     {
@@ -40,8 +44,17 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
+    bool CheckGrounded()
+    {
+        Vector2 rayOrigin = new Vector2(rb.position.x, rb.position.y - rb.GetComponent<Collider2D>().bounds.extents.y);
+        RaycastHit2D hit = Physics2D.Raycast(rayOrigin, Vector2.down, groundCheckDistance, groundLayer);
+        return hit.collider != null;
+    }
+
     void HandleMovement()
     {
+        isGrounded = CheckGrounded();
+        
         bool isCrouching = Input.GetKey(KeyCode.DownArrow);
         float moveInput = 0f;
         
@@ -110,6 +123,7 @@ public class PlayerMovement : MonoBehaviour
             animator.SetBool("isMoving", moveInput != 0f && !isCurrentlyRolling);
             animator.SetBool("isCrouching", isCrouching && !isCurrentlyRolling);
             animator.SetBool("isRolling", isCurrentlyRolling);
+            animator.SetBool("isFalling", !isGrounded);
         }
     }
 }
