@@ -114,159 +114,172 @@ TextureImporter:
     ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: door.png-e52e668448189bde1c5bf2ddea662f4d_0
+      name: door animated_0
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 17
-        height: 36
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: f47fa4301c073bbc0800000000000000
-      internalID: -3768544488892729521
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: door.png-e52e668448189bde1c5bf2ddea662f4d_1
-      rect:
-        serializedVersion: 2
-        x: 17
-        y: 0
         width: 16
-        height: 36
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        height: 35
+      alignment: 5
+      pivot: {x: 1, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: c13b0f18882697d90800000000000000
-      internalID: -7099534999137766628
+      spriteID: 358c68fe056df3e458acc6996eaa003e
+      internalID: 1357766208
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: door.png-e52e668448189bde1c5bf2ddea662f4d_2
+      name: door animated_1
       rect:
         serializedVersion: 2
-        x: 35
+        x: 18
         y: 0
         width: 14
-        height: 36
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        height: 35
+      alignment: 5
+      pivot: {x: 1, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: e42e4423964badcb0800000000000000
-      internalID: -4838356485748235698
+      spriteID: 3753651c5c9f34849975bc6e76285be8
+      internalID: 182222256
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: door.png-e52e668448189bde1c5bf2ddea662f4d_3
+      name: door animated_2
       rect:
         serializedVersion: 2
-        x: 53
+        x: 36
         y: 0
         width: 12
-        height: 36
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        height: 35
+      alignment: 5
+      pivot: {x: 1, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: 6f68cea5fde5af6c0800000000000000
-      internalID: -4108867396625987850
+      spriteID: a8437223e44ce5b4fb1c11e6556b680a
+      internalID: -514581038
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: door.png-e52e668448189bde1c5bf2ddea662f4d_4
+      name: door animated_3
       rect:
         serializedVersion: 2
-        x: 71
+        x: 54
         y: 0
         width: 10
-        height: 36
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        height: 35
+      alignment: 5
+      pivot: {x: 1, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: 3cc5fd8bc489b68c0800000000000000
-      internalID: -4004939988329341757
+      spriteID: 32cb48e980158f345877f10826bfc137
+      internalID: 1729997868
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: door.png-e52e668448189bde1c5bf2ddea662f4d_5
+      name: door animated_4
       rect:
         serializedVersion: 2
-        x: 89
+        x: 72
         y: 0
         width: 8
-        height: 36
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        height: 35
+      alignment: 5
+      pivot: {x: 1, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: f271d73823651afd0800000000000000
-      internalID: -2332488357046839505
+      spriteID: 47d13fb87e31b834396a1a65f4f1bc67
+      internalID: 1147679467
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: door.png-e52e668448189bde1c5bf2ddea662f4d_6
+      name: door animated_5
       rect:
         serializedVersion: 2
-        x: 107
+        x: 90
         y: 0
-        width: 5
-        height: 36
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        width: 6
+        height: 35
+      alignment: 5
+      pivot: {x: 1, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: 58890192f363b3730800000000000000
-      internalID: 3979834340611758213
+      spriteID: dd0b0ce397b7c6e45ab9381e0d388e47
+      internalID: -659545487
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: door animated_6
+      rect:
+        serializedVersion: 2
+        x: 108
+        y: 0
+        width: 4
+        height: 35
+      alignment: 5
+      pivot: {x: 1, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b2de2312284c5d249b01d4bdad9536fc
+      internalID: 907099242
       vertices: []
       indices: 
       edges: []
@@ -275,7 +288,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 
+    spriteID: 142c745cc248e91458609a7622b214cb
     internalID: 0
     vertices: []
     indices: 
@@ -285,13 +298,13 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      door.png-e52e668448189bde1c5bf2ddea662f4d_0: -3768544488892729521
-      door.png-e52e668448189bde1c5bf2ddea662f4d_1: -7099534999137766628
-      door.png-e52e668448189bde1c5bf2ddea662f4d_2: -4838356485748235698
-      door.png-e52e668448189bde1c5bf2ddea662f4d_3: -4108867396625987850
-      door.png-e52e668448189bde1c5bf2ddea662f4d_4: -4004939988329341757
-      door.png-e52e668448189bde1c5bf2ddea662f4d_5: -2332488357046839505
-      door.png-e52e668448189bde1c5bf2ddea662f4d_6: 3979834340611758213
+      door animated_0: 1357766208
+      door animated_1: 182222256
+      door animated_2: -514581038
+      door animated_3: 1729997868
+      door animated_4: 1147679467
+      door animated_5: -659545487
+      door animated_6: 907099242
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

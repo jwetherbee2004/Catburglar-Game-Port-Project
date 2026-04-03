@@ -14,6 +14,8 @@ public class PlayerInteraction : MonoBehaviour
         if (uiShown && Input.GetKeyDown(KeyCode.X))
         {
             currentInteractable.Interact(this);
+            // Forces a UI refresh
+            ShowHideUI();
         }
     }
 
@@ -22,13 +24,18 @@ public class PlayerInteraction : MonoBehaviour
     {
         uiShown = !uiShown;
         uiObject.SetActive(uiShown);
-        if (currentInteractable != null)
+        if (currentInteractable == null)
         {
-            interactText.text = currentInteractable.InteractionText;
-            if (!CheckIfInteractable())
-            {
-                uiObject.SetActive(false);
-            }
+            return;
+        }
+        if (currentInteractable.Object == null)
+        {
+            return;
+        }
+        interactText.text = currentInteractable.InteractionText;
+        if (!CheckIfInteractable())
+        {
+            uiObject.SetActive(false);
         }
     }
 
@@ -39,48 +46,59 @@ public class PlayerInteraction : MonoBehaviour
         {
             currentInteractable = interactable;
             ShowHideUI();
+            var gate = other.GetComponentInChildren<Gate>();
+            if (gate != null)
+            {
+                gate.ShowHideBorder();
+            }
         }
     }
 
     void OnTriggerStay2D(Collider2D other)
     {
         var interactable = other.GetComponent<IInteractable>();
-        if (interactable != null)
+        if (interactable == null)
         {
-            // This is a catch for if the player is moved but still in a trigger
-            if (!uiShown)
-            {
-                ShowHideUI();
-            }
-            // This stops the player from interacting with the same object repeatedly
-            if (!CheckIfInteractable())
-            {
-                uiObject.SetActive(false);
-            }
+            return;
+        }
+
+        currentInteractable = interactable;
+
+        // This is a catch for if the player is moved but still in a trigger
+        if (!uiShown)
+        {
+            ShowHideUI();
+        }
+        // This stops the player from interacting with the same object repeatedly
+        if (!CheckIfInteractable())
+        {
+            uiObject.SetActive(false);
         }
     }
 
     bool CheckIfInteractable()
     {
+        if (currentInteractable == null)
+        {
+            return false;
+        }
+        if (currentInteractable.Object == null)
+        {
+            return false;
+        }
+
         var searchObj = currentInteractable.Object.GetComponent<SearchObject>();
         if (searchObj != null)
         {
-            if (searchObj.doneInteracting == true)
-            {
-                return false;
-            }
+            return !searchObj.doneInteracting;
         }
-        else
+
+        var hackObj = currentInteractable.Object.GetComponent<HackObject>();
+        if (hackObj != null)
         {
-            var hackObj = currentInteractable.Object.GetComponent<HackObject>();
-            if (hackObj != null)
-            {
-                if (hackObj.doneInteracting == true)
-                {
-                    return false;
-                }
-            }
+            return !hackObj.doneInteracting;
         }
+
         return true;
     }
 
@@ -91,6 +109,11 @@ public class PlayerInteraction : MonoBehaviour
         {
             currentInteractable = null;
             ShowHideUI();
+            var gate = other.GetComponentInChildren<Gate>();
+            if (gate != null)
+            {
+                gate.ShowHideBorder();
+            }
         }
     }
 }
