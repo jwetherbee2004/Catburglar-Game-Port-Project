@@ -3,6 +3,8 @@ using UnityEngine;
 public class GameManager : MonoBehaviour
 {
     int loot = 0;
+    public int lightCount = 0;
+    public bool inLight => lightCount > 0;
     public static GameManager Instance;
 
     private void Awake()
@@ -26,5 +28,17 @@ public class GameManager : MonoBehaviour
     {
         loot += amount;
         Debug.Log("Loot: $" +  loot);
+    }
+
+    public void EnterLight()
+    {
+        lightCount++;
+        Debug.Log("Entered light. Light count: " + lightCount);
+    }
+
+    public void ExitLight()
+    {
+        lightCount = Mathf.Max(0, lightCount - 1);
+        Debug.Log("Exited light. Light count: " + lightCount);
     }
 }
