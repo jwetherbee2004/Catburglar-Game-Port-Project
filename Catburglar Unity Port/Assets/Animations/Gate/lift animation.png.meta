@@ -1,28 +1,19 @@
 fileFormatVersion: 2
-guid: dbb4fba087ac727469bfc10ef44c10b9
+guid: a096c2317881f914d8077bf3d9ec6f86
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -3768544488892729521
-    second: door.png-e52e668448189bde1c5bf2ddea662f4d_0
+      213: -2017649753049106184
+    second: lift_doors.png-6671f1b416193fa298139f31f9d64214_0
   - first:
-      213: -7099534999137766628
-    second: door.png-e52e668448189bde1c5bf2ddea662f4d_1
+      213: -7570232129768458187
+    second: lift_doors.png-6671f1b416193fa298139f31f9d64214_1
   - first:
-      213: -4838356485748235698
-    second: door.png-e52e668448189bde1c5bf2ddea662f4d_2
+      213: 5441249789824553462
+    second: lift_doors.png-6671f1b416193fa298139f31f9d64214_2
   - first:
-      213: -4108867396625987850
-    second: door.png-e52e668448189bde1c5bf2ddea662f4d_3
-  - first:
-      213: -4004939988329341757
-    second: door.png-e52e668448189bde1c5bf2ddea662f4d_4
-  - first:
-      213: -2332488357046839505
-    second: door.png-e52e668448189bde1c5bf2ddea662f4d_5
-  - first:
-      213: 3979834340611758213
-    second: door.png-e52e668448189bde1c5bf2ddea662f4d_6
+      213: 679753001812587988
+    second: lift_doors.png-6671f1b416193fa298139f31f9d64214_3
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -114,159 +105,150 @@ TextureImporter:
     ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: door.png-e52e668448189bde1c5bf2ddea662f4d_0
+      name: lift animation_0
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 17
-        height: 36
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        width: 16
+        height: 48
+      alignment: 5
+      pivot: {x: 1, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: f47fa4301c073bbc0800000000000000
-      internalID: -3768544488892729521
+      spriteID: a4cc7d063c72f1541bc69b77643d387d
+      internalID: 1005689930
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: door.png-e52e668448189bde1c5bf2ddea662f4d_1
+      name: lift animation_1
       rect:
         serializedVersion: 2
-        x: 17
+        x: 16
         y: 0
         width: 16
-        height: 36
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        height: 48
+      alignment: 5
+      pivot: {x: 1, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: c13b0f18882697d90800000000000000
-      internalID: -7099534999137766628
+      spriteID: 0ed8d4bb7c886564882e1bc3b37d4c1f
+      internalID: 639871340
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: door.png-e52e668448189bde1c5bf2ddea662f4d_2
+      name: lift animation_2
       rect:
         serializedVersion: 2
-        x: 35
+        x: 32
         y: 0
-        width: 14
-        height: 36
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        width: 16
+        height: 48
+      alignment: 5
+      pivot: {x: 1, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: e42e4423964badcb0800000000000000
-      internalID: -4838356485748235698
+      spriteID: 46901af023b10fb468c3b0c75472dacf
+      internalID: 1877521677
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: door.png-e52e668448189bde1c5bf2ddea662f4d_3
+      name: lift animation_3
       rect:
         serializedVersion: 2
-        x: 53
+        x: 48
         y: 0
-        width: 12
-        height: 36
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        width: 16
+        height: 48
+      alignment: 5
+      pivot: {x: 1, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: 6f68cea5fde5af6c0800000000000000
-      internalID: -4108867396625987850
+      spriteID: ab5bf6bda056a8347afa0f8f876db4f2
+      internalID: 1104851787
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: door.png-e52e668448189bde1c5bf2ddea662f4d_4
+      name: lift animation_4
       rect:
         serializedVersion: 2
-        x: 71
+        x: 64
         y: 0
-        width: 10
-        height: 36
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        width: 16
+        height: 48
+      alignment: 5
+      pivot: {x: 1, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: 3cc5fd8bc489b68c0800000000000000
-      internalID: -4004939988329341757
+      spriteID: d67f88a9a240207409cfdf1b61931fa7
+      internalID: -2144901507
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: door.png-e52e668448189bde1c5bf2ddea662f4d_5
+      name: lift animation_5
       rect:
         serializedVersion: 2
-        x: 89
+        x: 80
         y: 0
-        width: 8
-        height: 36
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        width: 16
+        height: 48
+      alignment: 5
+      pivot: {x: 1, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: f271d73823651afd0800000000000000
-      internalID: -2332488357046839505
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: door.png-e52e668448189bde1c5bf2ddea662f4d_6
-      rect:
-        serializedVersion: 2
-        x: 107
-        y: 0
-        width: 5
-        height: 36
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 58890192f363b3730800000000000000
-      internalID: 3979834340611758213
+      spriteID: a5f1031a6ad48b042a5e2b0571ff79b7
+      internalID: -1877541799
       vertices: []
       indices: 
       edges: []
@@ -275,7 +257,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 
+    spriteID: efa3ed7a574453746aea41f3a02b3044
     internalID: 0
     vertices: []
     indices: 
@@ -285,13 +267,12 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      door.png-e52e668448189bde1c5bf2ddea662f4d_0: -3768544488892729521
-      door.png-e52e668448189bde1c5bf2ddea662f4d_1: -7099534999137766628
-      door.png-e52e668448189bde1c5bf2ddea662f4d_2: -4838356485748235698
-      door.png-e52e668448189bde1c5bf2ddea662f4d_3: -4108867396625987850
-      door.png-e52e668448189bde1c5bf2ddea662f4d_4: -4004939988329341757
-      door.png-e52e668448189bde1c5bf2ddea662f4d_5: -2332488357046839505
-      door.png-e52e668448189bde1c5bf2ddea662f4d_6: 3979834340611758213
+      lift animation_0: 1005689930
+      lift animation_1: 639871340
+      lift animation_2: 1877521677
+      lift animation_3: 1104851787
+      lift animation_4: -2144901507
+      lift animation_5: -1877541799
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
