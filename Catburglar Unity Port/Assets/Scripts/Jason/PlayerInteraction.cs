@@ -105,15 +105,20 @@ public class PlayerInteraction : MonoBehaviour
     void OnTriggerExit2D(Collider2D other)
     {
         var interactable = other.GetComponent<IInteractable>();
-        if (interactable == currentInteractable)
+        if (interactable == currentInteractable && interactable != null)
         {
-            currentInteractable = null;
             ShowHideUI();
+            currentInteractable = null;
         }
         var gate = other.GetComponentInChildren<Gate>();
         if (gate != null)
         {
             gate.ShowHideBorder();
         }
+    }
+
+    public void ForceUIChange()
+    {
+        ShowHideUI();
     }
 }
