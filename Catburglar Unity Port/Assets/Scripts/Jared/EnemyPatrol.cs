@@ -12,6 +12,12 @@ public class EnemyPatrol : MonoBehaviour
     public Transform bubbleSprite;
     public Sprite[] bubbleSprites;
     public float speed;
+
+    [Header("Sleeper Settings")]
+    public bool isSleeper;
+    public int positionsUntilSleep = 5;
+    private int positionAmt;
+    public float sleepTime;
     
     [Header("Detection Settings")]
     public Transform player;
@@ -28,6 +34,12 @@ public class EnemyPatrol : MonoBehaviour
     private Animator animator;
     private int currentDirection;
     private SpriteRenderer bubbleSpriteRenderer;
+    
+    // Gizmo debug info
+    private Vector3 lastRaycastOrigin;
+    private Vector3 lastRaycastDirection;
+    private float lastRaycastDistance;
+    private bool lastDetectionResult;
 
     private void Awake()
     {
@@ -47,6 +59,17 @@ public class EnemyPatrol : MonoBehaviour
     
     private void Update()
     {
+        if (isSleeper)
+        {
+            if (positionAmt >= positionsUntilSleep)
+            {
+                animator.SetBool("isSleeping", true);
+                animator.SetBool("isWalking", false);
+                // StartCoroutine(Sleep());
+                positionAmt = 0;
+            }
+        }
+
         if (!isSpotting && !isWaiting && DetectPlayer())
         {
             StartCoroutine(SpotPlayer());
@@ -86,15 +109,35 @@ public class EnemyPatrol : MonoBehaviour
         float distanceToPlayer = Vector3.Distance(enemy.position, player.position);
 
         if (distanceToPlayer > raycastDistance)
+        {
+            lastDetectionResult = false;
             return false;
+        }
+
+        bool playerInFront = (currentDirection > 0 && player.position.x > enemy.position.x) ||
+                            (currentDirection < 0 && player.position.x < enemy.position.x);
+        
+        if (!playerInFront)
+        {
+            lastDetectionResult = false;
+            return false;
+        }
+
+        lastRaycastOrigin = enemy.position;
+        lastRaycastDirection = directionToPlayer;
+        lastRaycastDistance = distanceToPlayer;
 
         RaycastHit2D hit = Physics2D.Raycast(enemy.position, directionToPlayer, distanceToPlayer, playerLayer);
         if (!hit.collider)
+        {
+            lastDetectionResult = false;
             return false;
+        }
 
-        RaycastHit2D lightHit = Physics2D.Raycast(enemy.position, directionToPlayer, distanceToPlayer, lightLayer);
+        Collider2D playerInLight = Physics2D.OverlapPoint(player.position, lightLayer);
         
-        return lightHit.collider != null;
+        lastDetectionResult = playerInLight != null;
+        return lastDetectionResult;
     }
 
     private IEnumerator SpotPlayer()
@@ -158,6 +201,7 @@ public class EnemyPatrol : MonoBehaviour
         movingLeft = !movingLeft;
         animator.SetBool("isWalking", true);
         isWaiting = false;
+        positionAmt++;
     }
 
     private void MoveInDirection(int _direction)
@@ -172,5 +216,16 @@ public class EnemyPatrol : MonoBehaviour
         }
         
         enemy.position = new Vector3(enemy.position.x + Time.deltaTime * _direction * speed, enemy.position.y, enemy.position.z);
+    }
+
+    private void OnDrawGizmos()
+    {
+        if (lastRaycastDistance > 0 && enemy != null)
+        {
+            Vector3 raycastEnd = lastRaycastOrigin + lastRaycastDirection * lastRaycastDistance;
+            Gizmos.color = lastDetectionResult ? Color.red : Color.green;
+            Gizmos.DrawLine(lastRaycastOrigin, raycastEnd);
+            Gizmos.DrawWireSphere(raycastEnd, 0.1f);
+        }
     }
 }
