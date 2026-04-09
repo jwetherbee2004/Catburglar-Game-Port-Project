@@ -31,6 +31,7 @@ public class EnemyPatrol : MonoBehaviour
     private bool movingLeft;
     private bool isWaiting;
     private bool isSpotting;
+    private bool isSleeping;
     private Animator animator;
     private int currentDirection;
     private SpriteRenderer bubbleSpriteRenderer;
@@ -59,13 +60,11 @@ public class EnemyPatrol : MonoBehaviour
     
     private void Update()
     {
-        if (isSleeper)
+        if (isSleeper && !isSleeping)
         {
             if (positionAmt >= positionsUntilSleep)
             {
-                animator.SetBool("isSleeping", true);
-                animator.SetBool("isWalking", false);
-                // StartCoroutine(Sleep());
+                StartCoroutine(Sleep());
                 positionAmt = 0;
             }
         }
@@ -76,7 +75,7 @@ public class EnemyPatrol : MonoBehaviour
             return;
         }
 
-        if (isWaiting || isSpotting)
+        if (isWaiting || isSpotting || isSleeping)
         {
             animator.SetBool("isWalking", false);
             return;
@@ -102,7 +101,7 @@ public class EnemyPatrol : MonoBehaviour
 
     private bool DetectPlayer()
     {
-        if (player == null)
+        if (player == null || isSleeping)
             return false;
 
         Vector3 directionToPlayer = (player.position - enemy.position).normalized;
@@ -216,6 +215,31 @@ public class EnemyPatrol : MonoBehaviour
         }
         
         enemy.position = new Vector3(enemy.position.x + Time.deltaTime * _direction * speed, enemy.position.y, enemy.position.z);
+    }
+
+    private IEnumerator Sleep()
+    {
+        isSleeping = true;
+        animator.SetBool("isWalking", false);
+        animator.SetTrigger("sleep_start");
+        
+        yield return null;
+        AnimatorStateInfo stateInfo = animator.GetCurrentAnimatorStateInfo(0);
+        yield return new WaitForSeconds(stateInfo.length);
+        
+        animator.SetBool("isSleeping", true);
+        
+        yield return new WaitForSeconds(sleepTime);
+        
+        animator.SetBool("isSleeping", false);
+        animator.SetTrigger("wake_up");
+        
+        yield return null;
+        stateInfo = animator.GetCurrentAnimatorStateInfo(0);
+        yield return new WaitForSeconds(stateInfo.length);
+        
+        isSleeping = false;
+        animator.SetBool("isWalking", true);
     }
 
     private void OnDrawGizmos()

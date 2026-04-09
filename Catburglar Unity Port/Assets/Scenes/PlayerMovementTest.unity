@@ -1215,6 +1215,14 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5781392250576060099, guid: 9551b77c69ec9164f8efb324b30e059c, type: 3}
+      propertyPath: sleepTime
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 5781392250576060099, guid: 9551b77c69ec9164f8efb324b30e059c, type: 3}
+      propertyPath: positionsUntilSleep
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 5781392250576060099, guid: 9551b77c69ec9164f8efb324b30e059c, type: 3}
       propertyPath: questionMarkDuration
       value: 1
       objectReference: {fileID: 0}

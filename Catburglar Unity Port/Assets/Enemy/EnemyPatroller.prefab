@@ -241,6 +241,9 @@ MonoBehaviour:
   - {fileID: -9151198439299043822, guid: 1af8185d61486d54c978e173fe3af1e8, type: 3}
   - {fileID: -7439556301558850745, guid: bfc22696ecee4e245bf53b9e56680bfa, type: 3}
   speed: 2
+  isSleeper: 0
+  positionsUntilSleep: 5
+  sleepTime: 5
   player: {fileID: 0}
   raycastDistance: 10
   lightLayer:
@@ -249,7 +252,7 @@ MonoBehaviour:
   playerLayer:
     serializedVersion: 2
     m_Bits: 128
-  questionMarkDuration: 1.5
+  questionMarkDuration: 1
 --- !u!1 &3276489595458345313
 GameObject:
   m_ObjectHideFlags: 0
