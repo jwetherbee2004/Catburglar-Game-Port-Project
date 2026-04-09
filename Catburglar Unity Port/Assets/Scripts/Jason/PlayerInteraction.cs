@@ -109,11 +109,11 @@ public class PlayerInteraction : MonoBehaviour
         {
             currentInteractable = null;
             ShowHideUI();
-            var gate = other.GetComponentInChildren<Gate>();
-            if (gate != null)
-            {
-                gate.ShowHideBorder();
-            }
+        }
+        var gate = other.GetComponentInChildren<Gate>();
+        if (gate != null)
+        {
+            gate.ShowHideBorder();
         }
     }
 }
