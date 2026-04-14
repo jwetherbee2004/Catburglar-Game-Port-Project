@@ -133,6 +133,12 @@ public class EnemyPatrol : MonoBehaviour
             return false;
         }
 
+        if (GameManager.Instance.isHidden)
+        {
+            lastDetectionResult = false;
+            return false;
+        }
+
         Collider2D playerInLight = Physics2D.OverlapPoint(player.position, lightLayer);
         
         lastDetectionResult = playerInLight != null;

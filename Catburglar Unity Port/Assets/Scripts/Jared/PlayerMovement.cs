@@ -15,6 +15,7 @@ public class PlayerMovement : MonoBehaviour
     private float rollTimer = 0f;
     private float rollDirection = 0f;
     private bool isGrounded = false;
+    public bool isCrouching { get; private set; } = false;
 
     void Start()
     {
@@ -55,7 +56,7 @@ public class PlayerMovement : MonoBehaviour
     {
         isGrounded = CheckGrounded();
         
-        bool isCrouching = Input.GetKey(KeyCode.DownArrow);
+        isCrouching = Input.GetKey(KeyCode.DownArrow);
         float moveInput = 0f;
         
         if (rollTimer > 0f)

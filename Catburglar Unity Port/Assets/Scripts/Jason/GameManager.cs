@@ -5,6 +5,7 @@ public class GameManager : MonoBehaviour
     int loot = 0;
     public int lightCount = 0;
     public bool inLight => lightCount > 0;
+    public bool isHidden;
     public static GameManager Instance;
 
     private void Awake()
@@ -40,5 +41,11 @@ public class GameManager : MonoBehaviour
     {
         lightCount = Mathf.Max(0, lightCount - 1);
         Debug.Log("Exited light. Light count: " + lightCount);
+    }
+
+    public void SetHidden(bool hidden)
+    {
+        isHidden = hidden;
+        Debug.Log("Player is " + (isHidden ? "hidden" : "visible"));
     }
 }
