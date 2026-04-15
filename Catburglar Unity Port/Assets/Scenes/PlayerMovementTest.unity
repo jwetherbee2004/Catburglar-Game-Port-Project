@@ -757,6 +757,7 @@ GameObject:
   - component: {fileID: 847727448}
   - component: {fileID: 847727451}
   - component: {fileID: 847727450}
+  - component: {fileID: 847727452}
   m_Layer: 0
   m_Name: security_camera_0
   m_TagString: Untagged
@@ -828,7 +829,7 @@ Transform:
   m_GameObject: {fileID: 847727447}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -5.0323167, y: 0.022, z: 0}
+  m_LocalPosition: {x: 6.31, y: 0.022, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -846,9 +847,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 317a5b7f72d7a644d9a204fe271f181b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cameraSprites:
+  leftCameraSprites:
   - {fileID: -5208716482709753447, guid: 3671c489102761c45863811e044de960, type: 3}
   - {fileID: 5444749858170501474, guid: 3671c489102761c45863811e044de960, type: 3}
+  rightCameraSprites:
+  - {fileID: -3764437139132332241, guid: 3671c489102761c45863811e044de960, type: 3}
+  - {fileID: 501196887421483835, guid: 3671c489102761c45863811e044de960, type: 3}
+  animator: {fileID: 847727452}
+  cameraCollider: {fileID: 847727451}
 --- !u!60 &847727451
 PolygonCollider2D:
   m_ObjectHideFlags: 0
@@ -904,6 +910,28 @@ PolygonCollider2D:
       - {x: 0.5, y: 0.1875}
       - {x: 0.5, y: 0.5}
   m_UseDelaunayMesh: 0
+--- !u!95 &847727452
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 847727447}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 74c26cced832cdf478c7ea167a6dff0b, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &921243582
 GameObject:
   m_ObjectHideFlags: 0
