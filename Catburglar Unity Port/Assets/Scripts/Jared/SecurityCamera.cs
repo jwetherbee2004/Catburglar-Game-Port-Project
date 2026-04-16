@@ -80,7 +80,6 @@ public class SecurityCamera : MonoBehaviour
         }
 
         playerInCamera = playerDetected;
-        Debug.Log(playerInCamera);
         bool shouldBlink = playerInCamera && GameManager.Instance.inLight && !GameManager.Instance.isHidden;
         animator.SetBool("Blinking", shouldBlink);
     }

@@ -160,6 +160,7 @@ public class EnemyPatrol : MonoBehaviour
         {
             ShowBubble(1);
             LockPlayerMovement();
+            GameManager.Instance.ResetLevel();
             yield return new WaitForSeconds(2f);
         }
         
