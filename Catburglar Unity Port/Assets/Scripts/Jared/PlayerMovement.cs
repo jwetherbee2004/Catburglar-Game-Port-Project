@@ -8,6 +8,7 @@ public class PlayerMovement : MonoBehaviour
     public float moveSpeed = 5f;
     public float rollDistance = 8f;
     public float rollDuration = 1.5f;
+    public bool playerIsCaught = false;
     
     public LayerMask groundLayer;
     public float groundCheckDistance = 0.5f;
@@ -15,6 +16,7 @@ public class PlayerMovement : MonoBehaviour
     private float rollTimer = 0f;
     private float rollDirection = 0f;
     private bool isGrounded = false;
+    public bool isCrouching { get; private set; } = false;
 
     void Start()
     {
@@ -44,6 +46,11 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
+    public Animator GetAnimator()
+    {
+        return animator;
+    }
+
     bool CheckGrounded()
     {
         Vector2 rayOrigin = new Vector2(rb.position.x, rb.position.y - rb.GetComponent<Collider2D>().bounds.extents.y);
@@ -55,7 +62,7 @@ public class PlayerMovement : MonoBehaviour
     {
         isGrounded = CheckGrounded();
         
-        bool isCrouching = Input.GetKey(KeyCode.DownArrow);
+        isCrouching = Input.GetKey(KeyCode.DownArrow);
         float moveInput = 0f;
         
         if (rollTimer > 0f)
@@ -115,9 +122,9 @@ public class PlayerMovement : MonoBehaviour
         {
             velocityX = moveInput * moveSpeed;
         }
-        
+
         rb.linearVelocity = new Vector2(velocityX, rb.linearVelocity.y);
-        
+
         if (animator != null)
         {
             animator.SetBool("isMoving", moveInput != 0f && !isCurrentlyRolling);
