@@ -61,22 +61,26 @@ public class SecurityCamera : MonoBehaviour
         }
 
         if (!activeCollider.enabled)
-        {
             activeCollider.enabled = true;
-            List<Collider2D> results = new List<Collider2D>();
-            Physics2D.OverlapCollider(activeCollider, new ContactFilter2D(), results);
-            foreach (Collider2D col in results)
+
+        if (inactiveCollider.enabled)
+            inactiveCollider.enabled = false;
+
+        List<Collider2D> results = new List<Collider2D>();
+        Physics2D.OverlapCollider(activeCollider, new ContactFilter2D(), results);
+
+        bool playerDetected = false;
+        foreach (Collider2D col in results)
+        {
+            if (col.CompareTag("Player"))
             {
-                if (col.CompareTag("Player"))
-                {
-                    playerInCamera = true;
-                    break;
-                }
+                playerDetected = true;
+                break;
             }
         }
 
-        inactiveCollider.enabled = false;
-
+        playerInCamera = playerDetected;
+        Debug.Log(playerInCamera);
         bool shouldBlink = playerInCamera && GameManager.Instance.inLight && !GameManager.Instance.isHidden;
         animator.SetBool("Blinking", shouldBlink);
     }
