@@ -115,9 +115,9 @@ public class PlayerMovement : MonoBehaviour
         {
             velocityX = moveInput * moveSpeed;
         }
-
-        rb.velocity = new Vector2(velocityX, rb.velocity.y);
-
+        
+        rb.linearVelocity = new Vector2(velocityX, rb.linearVelocity.y);
+        
         if (animator != null)
         {
             animator.SetBool("isMoving", moveInput != 0f && !isCurrentlyRolling);
