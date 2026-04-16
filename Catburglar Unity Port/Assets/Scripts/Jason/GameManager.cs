@@ -12,6 +12,7 @@ public class GameManager : MonoBehaviour
     public bool inLight => lightCount > 0;
     public bool isHidden;
     public static GameManager Instance;
+    private bool isResettingLevel = false;
 
     private void Awake()
     {
@@ -56,6 +57,8 @@ public class GameManager : MonoBehaviour
 
     public void ResetLevel()
     {
+        if (isResettingLevel) return;
+        isResettingLevel = true;
         StartCoroutine(FadeAndRestart());
     }
 
@@ -118,6 +121,13 @@ public class GameManager : MonoBehaviour
             yield return null;
         }
 
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        Time.timeScale = 1f;
+        string sceneName = SceneManager.GetActiveScene().name;
+        Debug.Log("Reloading scene: " + sceneName);
+        
+        DestroyImmediate(canvasGO);
+        DestroyImmediate(volumeGO);
+        
+        SceneManager.LoadScene(sceneName);
     }
 }

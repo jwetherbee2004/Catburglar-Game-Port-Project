@@ -8,6 +8,7 @@ public class PlayerMovement : MonoBehaviour
     public float moveSpeed = 5f;
     public float rollDistance = 8f;
     public float rollDuration = 1.5f;
+    public bool playerIsCaught = false;
     
     public LayerMask groundLayer;
     public float groundCheckDistance = 0.5f;
@@ -43,6 +44,11 @@ public class PlayerMovement : MonoBehaviour
         {
             rollDirection *= -1f;
         }
+    }
+
+    public Animator GetAnimator()
+    {
+        return animator;
     }
 
     bool CheckGrounded()

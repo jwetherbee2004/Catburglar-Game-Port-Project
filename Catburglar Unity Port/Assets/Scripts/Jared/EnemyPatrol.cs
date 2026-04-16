@@ -158,10 +158,15 @@ public class EnemyPatrol : MonoBehaviour
         
         if (DetectPlayer())
         {
-            ShowBubble(1);
-            LockPlayerMovement();
-            GameManager.Instance.ResetLevel();
-            yield return new WaitForSeconds(2f);
+            if(!player.GetComponent<PlayerMovement>().playerIsCaught)
+            {
+                player.GetComponent<PlayerMovement>().playerIsCaught = true;
+                ShowBubble(1);
+                LockPlayerMovement();
+                player.GetComponent<PlayerMovement>().GetAnimator().SetTrigger("Caught");
+                GameManager.Instance.ResetLevel();
+                yield return new WaitForSeconds(2f);
+            }
         }
         
         HideBubble();
@@ -188,6 +193,10 @@ public class EnemyPatrol : MonoBehaviour
         PlayerMovement playerMovement = player.GetComponent<PlayerMovement>();
         if (playerMovement != null)
             playerMovement.enabled = false;
+
+        Rigidbody2D playerRb = player.GetComponent<Rigidbody2D>();
+        if (playerRb != null)
+            playerRb.linearVelocity = Vector2.zero;
     }
 
     private void DirectionChange()

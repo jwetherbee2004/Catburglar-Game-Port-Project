@@ -9,10 +9,19 @@ public class SecurityCamera : MonoBehaviour
     public Collider2D cameraColliderRight;
     public bool startFacingLeft = true;
     public float switchInterval = 4f;
+    public Transform player;
 
     private bool playerInCamera;
     private bool isSwitching;
     private bool facingLeft;
+    private float blinkingDuration = 0f;
+    private bool isCatching = false;
+
+    void Awake()
+    {
+        if (player == null)
+            player = GameObject.FindGameObjectWithTag("Player")?.transform;
+    }
 
     void Start()
     {
@@ -38,7 +47,7 @@ public class SecurityCamera : MonoBehaviour
 
     void Update()
     {
-        if (isSwitching)
+        if (isSwitching || isCatching)
         {
             animator.SetBool("Blinking", false);
             cameraColliderLeft.enabled = false;
@@ -82,6 +91,19 @@ public class SecurityCamera : MonoBehaviour
         playerInCamera = playerDetected;
         bool shouldBlink = playerInCamera && GameManager.Instance.inLight && !GameManager.Instance.isHidden;
         animator.SetBool("Blinking", shouldBlink);
+
+        if (shouldBlink)
+        {
+            blinkingDuration += Time.deltaTime;
+            if (blinkingDuration >= 1f && !isCatching) // Change the number to adjust how long the player needs to be in the camera before being caught
+            {
+                StartCoroutine(CatchPlayer());
+            }
+        }
+        else
+        {
+            blinkingDuration = 0f;
+        }
     }
 
     private void OnTriggerEnter2D(Collider2D other)
@@ -94,6 +116,23 @@ public class SecurityCamera : MonoBehaviour
     {
         if (other.CompareTag("Player"))
             playerInCamera = false;
+    }
+
+    private IEnumerator CatchPlayer()
+    {
+        if(player.GetComponent<PlayerMovement>().playerIsCaught)
+            yield break;
+        
+        isCatching = true;
+        blinkingDuration = 0f;
+        
+        LockPlayerMovement();
+        player.GetComponent<PlayerMovement>().GetAnimator().SetTrigger("Caught");
+        GameManager.Instance.ResetLevel();
+        
+        yield return new WaitForSeconds(2f);
+        
+        isCatching = false;
     }
 
     private IEnumerator CameraSwitchCycle()
@@ -148,5 +187,16 @@ public class SecurityCamera : MonoBehaviour
         //     cameraCollider.enabled = true;
 
         isSwitching = false;
+    }
+
+    private void LockPlayerMovement()
+    {
+        PlayerMovement playerMovement = player.GetComponent<PlayerMovement>();
+        if (playerMovement != null)
+            playerMovement.enabled = false;
+
+        Rigidbody2D playerRb = player.GetComponent<Rigidbody2D>();
+        if (playerRb != null)
+            playerRb.linearVelocity = Vector2.zero;
     }
 }
