@@ -12,6 +12,6 @@ public class CollectableObject : MonoBehaviour, IInteractable
         // In the future this method should be called through the stealing animation
         player.ForceUIChange();
         // In the future this should be destroyed after the stealing animation
-        Destroy(gameObject);
+        // Destroy(gameObject);
     }
 }

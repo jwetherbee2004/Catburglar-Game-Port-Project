@@ -5,8 +5,14 @@ public class PlayerInteraction : MonoBehaviour
 {
     [SerializeField] private GameObject uiObject;
     [SerializeField] private TextMeshProUGUI interactText;
+    public Transform player;
     private IInteractable currentInteractable;
     private bool uiShown = false;
+
+    void Awake()
+    {
+        player = GameObject.FindGameObjectWithTag("Player")?.transform;
+    }
 
     // Update is called once per frame
     void Update()
@@ -14,6 +20,7 @@ public class PlayerInteraction : MonoBehaviour
         if (uiShown && Input.GetKeyDown(KeyCode.X))
         {
             currentInteractable.Interact(this);
+            player.GetComponent<PlayerMovement>().GetAnimator().SetTrigger("Steal");
             // Forces a UI refresh
             ShowHideUI();
         }
@@ -120,5 +127,13 @@ public class PlayerInteraction : MonoBehaviour
     public void ForceUIChange()
     {
         ShowHideUI();
+    }
+
+    public void DestroyStolenObject()
+    {
+        if (currentInteractable != null)
+        {
+            Destroy(currentInteractable.Object);
+        }
     }
 }
