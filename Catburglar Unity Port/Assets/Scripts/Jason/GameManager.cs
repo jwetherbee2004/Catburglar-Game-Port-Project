@@ -1,12 +1,18 @@
-using UnityEngine;
 using System.Collections;
+using TMPro;
+using UnityEngine;
 using UnityEngine.Rendering;
 using UnityEngine.Rendering.Universal;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using static Unity.Burst.Intrinsics.X86.Avx;
 
 public class GameManager : MonoBehaviour
 {
+    [SerializeField] private TextMeshProUGUI lootText;
+    [SerializeField] private TextMeshProUGUI moneyText;
+    private Vector3 moneyTextStart = new Vector3(25, 560, 0);
+    private Vector3 moneyTextEnd = new Vector3 (25, 536, 0);
     int loot = 0;
     public int lightCount = 0;
     public bool inLight => lightCount > 0;
@@ -34,7 +40,32 @@ public class GameManager : MonoBehaviour
     public void AddMoney(int amount)
     {
         loot += amount;
-        Debug.Log("Loot: $" +  loot);
+        moneyText.text = "$" + loot;
+        StartCoroutine(MoneyTextAnimation());
+    }
+
+    private IEnumerator MoneyTextAnimation()
+    {
+        float duration = 1f;
+        float elapsed = 0f;
+        lootText.gameObject.SetActive(true);
+        moneyText.gameObject.SetActive(true);
+        lootText.transform.position = moneyTextStart;
+        moneyText.transform.position = new Vector3(lootText.transform.position.x + 70, lootText.transform.position.y, 0);
+
+        while (elapsed < duration)
+        {
+            elapsed += Time.deltaTime;
+            float t = elapsed / duration;
+
+            lootText.transform.position = Vector3.Lerp(moneyTextStart, moneyTextEnd, t);
+            moneyText.transform.position = new Vector3(lootText.transform.position.x+60, lootText.transform.position.y, 0);
+
+            yield return null;
+        }
+        yield return new WaitForSeconds(1f);
+        lootText.gameObject.SetActive(false);
+        moneyText.gameObject.SetActive(false);
     }
 
     public void EnterLight()
@@ -130,4 +161,6 @@ public class GameManager : MonoBehaviour
         
         SceneManager.LoadScene(sceneName);
     }
+
+
 }
