@@ -6,6 +6,11 @@ public class CollectableObject : MonoBehaviour, IInteractable
     [SerializeField] int value = 0;
     public GameObject Object => gameObject;
 
+    void Start()
+    {
+        gameObject.layer = LayerMask.NameToLayer("Ignore Raycast");
+    }
+
     public void Interact(PlayerInteraction player)
     {
         GameManager.Instance.AddMoney(value);

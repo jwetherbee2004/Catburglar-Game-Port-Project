@@ -669,6 +669,7 @@ MonoBehaviour:
   rollDistance: 8
   rollDuration: 1
   playerIsCaught: 0
+  isCurrentlyRolling: 0
   groundLayer:
     serializedVersion: 2
     m_Bits: 64
