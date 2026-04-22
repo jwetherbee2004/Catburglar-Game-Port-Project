@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 3878870121443701824}
   - component: {fileID: 7875670813649213723}
   - component: {fileID: -8608154127386868093}
+  - component: {fileID: 5695520843373931030}
   m_Layer: 7
   m_Name: Player
   m_TagString: Player
@@ -77,9 +78,9 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
-  m_SortingOrder: 1
+  m_SortingLayerID: -451567661
+  m_SortingLayer: 3
+  m_SortingOrder: 5
   m_Sprite: {fileID: 4334783836991956000, guid: b5fa0cf59dce6734bb9299cd4a67c52e, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -107,7 +108,7 @@ Rigidbody2D:
   m_LinearDamping: 0
   m_AngularDamping: 0.05
   m_GravityScale: 3
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 6200000, guid: e11fb9aa6424bc047a6a5b949c9dd014, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -130,13 +131,36 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4d46007e899c56249b91f4e56409fbae, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_slideMovement:
+    <maxIterations>k__BackingField: 3
+    <surfaceSlideAngle>k__BackingField: 90
+    <gravitySlipAngle>k__BackingField: 90
+    <surfaceUp>k__BackingField: {x: 0, y: 1}
+    <surfaceAnchor>k__BackingField: {x: 0, y: -1}
+    <gravity>k__BackingField: {x: 0, y: 0}
+    <startPosition>k__BackingField: {x: 0, y: 0}
+    <selectedCollider>k__BackingField: {fileID: -8608154127386868093}
+    <layerMask>k__BackingField:
+      serializedVersion: 2
+      m_Bits: 4294967295
+    <useLayerMask>k__BackingField: 0
+    <useStartPosition>k__BackingField: 0
+    <useNoMove>k__BackingField: 0
+    <useSimulationMove>k__BackingField: 0
+    <useAttachedTriggers>k__BackingField: 0
   moveSpeed: 6
   rollDistance: 8
   rollDuration: 1
+  playerIsCaught: 0
   groundLayer:
     serializedVersion: 2
     m_Bits: 64
-  groundCheckDistance: 1
+  platformLayer:
+    serializedVersion: 2
+    m_Bits: 512
+  platformText: Platform
+  playerText: Player
+  groundCheckDistance: 0.75
 --- !u!95 &7875670813649213723
 Animator:
   serializedVersion: 7
@@ -196,3 +220,17 @@ CapsuleCollider2D:
   m_Offset: {x: -0.03, y: -0.305}
   m_Size: {x: 1.07, y: 2.03}
   m_Direction: 0
+--- !u!114 &5695520843373931030
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7852899759394268378}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d50b1d11edd350141a17db720be31533, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  uiObject: {fileID: 0}
+  interactText: {fileID: 0}

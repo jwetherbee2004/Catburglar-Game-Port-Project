@@ -3,6 +3,8 @@ using UnityEngine;
 public class PlayerMovement : MonoBehaviour
 {
     private Rigidbody2D rb;
+    [SerializeField] private Rigidbody2D.SlideMovement m_slideMovement = new();
+
     private Animator animator;
     private SpriteRenderer spriteRenderer;
     public float moveSpeed = 5f;
@@ -11,9 +13,13 @@ public class PlayerMovement : MonoBehaviour
     public bool playerIsCaught = false;
     
     public LayerMask groundLayer;
+    public LayerMask platformLayer;
+    public string platformText = "Platform";
+    public string playerText = "Player";
     public float groundCheckDistance = 0.5f;
     
     private float rollTimer = 0f;
+    private float platformTimer = 0f;
     private float rollDirection = 0f;
     private bool isGrounded = false;
     public bool isCrouching { get; private set; } = false;
@@ -55,7 +61,12 @@ public class PlayerMovement : MonoBehaviour
     {
         Vector2 rayOrigin = new Vector2(rb.position.x, rb.position.y - rb.GetComponent<Collider2D>().bounds.extents.y);
         RaycastHit2D hit = Physics2D.Raycast(rayOrigin, Vector2.down, groundCheckDistance, groundLayer);
-        return hit.collider != null;
+        if (hit.collider != null)
+            return true;
+        RaycastHit2D hit2 = Physics2D.Raycast(rayOrigin, Vector2.down, groundCheckDistance, platformLayer);
+        if (hit2.collider != null)
+            return true;
+        return false;
     }
 
     void HandleMovement()
@@ -63,7 +74,22 @@ public class PlayerMovement : MonoBehaviour
         isGrounded = CheckGrounded();
         
         isCrouching = Input.GetKey(KeyCode.DownArrow);
-        float moveInput = 0f;
+
+        if (Input.GetKeyDown(KeyCode.X) && isCrouching)
+        {
+            Physics2D.IgnoreLayerCollision(LayerMask.NameToLayer(playerText), LayerMask.NameToLayer(platformText), true);
+            platformTimer = 1;
+        } 
+        else if (platformTimer >= 0f)
+        {
+            platformTimer -= Time.deltaTime;
+        }
+        else
+        {
+            Physics2D.IgnoreLayerCollision(LayerMask.NameToLayer(playerText), LayerMask.NameToLayer(platformText), false);
+        }
+
+            float moveInput = 0f;
         
         if (rollTimer > 0f)
             rollTimer -= Time.deltaTime;
@@ -124,6 +150,7 @@ public class PlayerMovement : MonoBehaviour
         }
 
         rb.linearVelocity = new Vector2(velocityX, rb.linearVelocity.y);
+        //rb.Slide(new Vector2(velocityX, rb.linearVelocity.y), Time.deltaTime, m_slideMovement);
 
         if (animator != null)
         {
