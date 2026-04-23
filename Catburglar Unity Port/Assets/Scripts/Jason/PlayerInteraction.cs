@@ -5,13 +5,19 @@ public class PlayerInteraction : MonoBehaviour
 {
     [SerializeField] private GameObject uiObject;
     [SerializeField] private TextMeshProUGUI interactText;
+    public Transform player;
     private IInteractable currentInteractable;
     private bool uiShown = false;
+
+    void Awake()
+    {
+        player = GameObject.FindGameObjectWithTag("Player")?.transform;
+    }
 
     // Update is called once per frame
     void Update()
     {
-        if (uiShown && Input.GetKeyDown(KeyCode.X))
+        if (uiShown && Input.GetKeyDown(KeyCode.X) && player.GetComponent<PlayerMovement>().canInteract)
         {
             currentInteractable.Interact(this);
             // Forces a UI refresh
@@ -22,6 +28,14 @@ public class PlayerInteraction : MonoBehaviour
     // Shows/Hides the interaction UI prompt
     void ShowHideUI()
     {
+        // Don't show UI if the player cannot interact
+        if (!player.GetComponent<PlayerMovement>().canInteract)
+        {
+            uiShown = false;
+            uiObject.SetActive(false);
+            return;
+        }
+        
         uiShown = !uiShown;
         uiObject.SetActive(uiShown);
         if (currentInteractable == null)
@@ -63,16 +77,24 @@ public class PlayerInteraction : MonoBehaviour
         }
 
         currentInteractable = interactable;
-
-        // This is a catch for if the player is moved but still in a trigger
-        if (!uiShown)
+        
+        bool canInteract = player.GetComponent<PlayerMovement>().canInteract;
+        
+        // Hide UI if player can't interact
+        if (!canInteract && uiShown)
         {
-            ShowHideUI();
-        }
-        // This stops the player from interacting with the same object repeatedly
-        if (!CheckIfInteractable())
-        {
+            uiShown = false;
             uiObject.SetActive(false);
+        }
+        // Show UI if player can interact and UI is hidden
+        else if (canInteract && !uiShown && CheckIfInteractable())
+        {
+            uiShown = true;
+            uiObject.SetActive(true);
+            if (currentInteractable != null && currentInteractable.Object != null)
+            {
+                interactText.text = currentInteractable.InteractionText;
+            }
         }
     }
 
@@ -120,5 +142,13 @@ public class PlayerInteraction : MonoBehaviour
     public void ForceUIChange()
     {
         ShowHideUI();
+    }
+
+    public void DestroyStolenObject()
+    {
+        if (currentInteractable != null)
+        {
+            Destroy(currentInteractable.Object);
+        }
     }
 }

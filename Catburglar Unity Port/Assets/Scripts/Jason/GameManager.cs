@@ -19,10 +19,17 @@ public class GameManager : MonoBehaviour
     public bool isHidden;
     public static GameManager Instance;
     private bool isResettingLevel = false;
+    public TimeTracker timeTracker { get; private set; }
 
     private void Awake()
     {
         Instance = this;
+        
+        timeTracker = GetComponent<TimeTracker>();
+        if (timeTracker == null)
+        {
+            timeTracker = gameObject.AddComponent<TimeTracker>();
+        }
     }
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -66,6 +73,11 @@ public class GameManager : MonoBehaviour
         yield return new WaitForSeconds(1f);
         lootText.gameObject.SetActive(false);
         moneyText.gameObject.SetActive(false);
+    }
+
+    public int GetLoot()
+    {
+        return loot;
     }
 
     public void EnterLight()
