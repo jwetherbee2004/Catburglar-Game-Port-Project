@@ -670,6 +670,7 @@ MonoBehaviour:
   rollDuration: 1
   playerIsCaught: 0
   isCurrentlyRolling: 0
+  canInteract: 1
   groundLayer:
     serializedVersion: 2
     m_Bits: 64
@@ -1135,7 +1136,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: -1
   m_Sprite: {fileID: -473930898, guid: d93cea74bf9fe024eb6faf6af73cf2a2, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
