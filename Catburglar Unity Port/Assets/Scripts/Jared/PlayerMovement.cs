@@ -61,6 +61,7 @@ public class PlayerMovement : MonoBehaviour
     public void LockMovement()
     {
         isMovementLocked = true;
+        animator.SetBool("isMoving", false);
         rb.linearVelocity = new Vector2(0f, rb.linearVelocity.y);
     }
 
