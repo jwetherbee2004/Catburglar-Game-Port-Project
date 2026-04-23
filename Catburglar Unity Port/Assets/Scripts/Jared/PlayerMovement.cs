@@ -28,6 +28,7 @@ public class PlayerMovement : MonoBehaviour
     
     private bool rollCanceled = false;
     private float rollRecoveryDuration = 0.1f;
+    private bool isMovementLocked = false;
 
     void Start()
     {
@@ -63,6 +64,17 @@ public class PlayerMovement : MonoBehaviour
         return animator;
     }
 
+    public void LockMovement()
+    {
+        isMovementLocked = true;
+        rb.linearVelocity = new Vector2(0f, rb.linearVelocity.y);
+    }
+
+    public void UnlockMovement()
+    {
+        isMovementLocked = false;
+    }
+
     bool CheckGrounded()
     {
         Vector2 rayOrigin = new Vector2(rb.position.x, rb.position.y - rb.GetComponent<Collider2D>().bounds.extents.y);
@@ -77,6 +89,12 @@ public class PlayerMovement : MonoBehaviour
 
     void HandleMovement()
     {
+        if (isMovementLocked)
+        {
+            rb.linearVelocity = new Vector2(0f, rb.linearVelocity.y);
+            return;
+        }
+
         isGrounded = CheckGrounded();
         
         isCrouching = Input.GetKey(KeyCode.DownArrow);

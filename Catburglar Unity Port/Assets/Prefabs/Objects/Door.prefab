@@ -405,6 +405,7 @@ MonoBehaviour:
   connectedGate: {fileID: 0}
   border: {fileID: 6769889352452071796}
   animator: {fileID: 0}
+  fadeDuration: 0.6
 --- !u!61 &5481204683670236023
 BoxCollider2D:
   m_ObjectHideFlags: 0

@@ -462,6 +462,10 @@ PrefabInstance:
       propertyPath: connectedGate
       value: 
       objectReference: {fileID: 0}
+    - target: {fileID: 6769889352452071796, guid: ebf41c6d9a32d8b48ab7db18cf6c40b5, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7157695905672244314, guid: ebf41c6d9a32d8b48ab7db18cf6c40b5, type: 3}
       propertyPath: connectedGate
       value: 
@@ -783,6 +787,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 294d3fc722fe5404bacd35287d1fd90c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  lightCount: 0
+  isHidden: 0
 --- !u!4 &1192061819
 Transform:
   m_ObjectHideFlags: 0
@@ -1530,6 +1536,9 @@ MonoBehaviour:
   moveSpeed: 6
   rollDistance: 8
   rollDuration: 1
+  playerIsCaught: 0
+  isCurrentlyRolling: 0
+  canInteract: 1
   groundLayer:
     serializedVersion: 2
     m_Bits: 64
@@ -1645,6 +1654,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   uiObject: {fileID: 1193955067}
   interactText: {fileID: 207070725}
+  player: {fileID: 0}
 --- !u!114 &2011667440 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 5242081922510778995, guid: c0eae6564ac11dd49ab9c3f620ce84b1, type: 3}
