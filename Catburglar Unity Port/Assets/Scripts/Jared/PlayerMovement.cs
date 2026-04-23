@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
@@ -68,6 +69,27 @@ public class PlayerMovement : MonoBehaviour
     public void UnlockMovement()
     {
         isMovementLocked = false;
+    }
+
+    public void PlayStealAndUnlock()
+    {
+        LockMovement();
+        StartCoroutine(StealCoroutine());
+    }
+
+    private IEnumerator StealCoroutine()
+    {
+        animator.SetTrigger("Steal");
+
+        yield return null;
+        yield return null;
+        while (animator.IsInTransition(0))
+            yield return null;
+
+        float clipLength = animator.GetCurrentAnimatorStateInfo(0).length;
+        yield return new WaitForSeconds(clipLength);
+
+        UnlockMovement();
     }
 
     bool CheckGrounded()
