@@ -11,20 +11,25 @@ public class GameManager : MonoBehaviour
 {
     [SerializeField] private TextMeshProUGUI lootText;
     [SerializeField] private TextMeshProUGUI moneyText;
+    [SerializeField] private TextMeshProUGUI objectiveText;
+    [SerializeField] private TextMeshProUGUI goalText;
+    [SerializeField] private GameObject dialogueObject;
+    [SerializeField] private TextMeshProUGUI dialogueText;
     private Vector3 moneyTextStart = new Vector3(25, 560, 0);
     private Vector3 moneyTextEnd = new Vector3 (25, 536, 0);
-    int loot = 0;
+    private int loot = 0;
+    private int level = 0;
+    private int[] lootRequirements = { 300, 0, 0 };
     public int lightCount = 0;
     public bool inLight => lightCount > 0;
     public bool isHidden;
     public static GameManager Instance;
-    private bool isResettingLevel = false;
+    private bool isResettingLevel = false;    
     public TimeTracker timeTracker { get; private set; }
 
     private void Awake()
     {
         Instance = this;
-        
         timeTracker = GetComponent<TimeTracker>();
         if (timeTracker == null)
         {
@@ -35,13 +40,18 @@ public class GameManager : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        
+        DisplayObjective();
     }
 
     // Update is called once per frame
     void Update()
     {
         
+    }
+
+    public int GetLoot()
+    {
+        return loot;
     }
 
     public void AddMoney(int amount)
@@ -73,11 +83,6 @@ public class GameManager : MonoBehaviour
         yield return new WaitForSeconds(1f);
         lootText.gameObject.SetActive(false);
         moneyText.gameObject.SetActive(false);
-    }
-
-    public int GetLoot()
-    {
-        return loot;
     }
 
     public void EnterLight()
@@ -174,5 +179,37 @@ public class GameManager : MonoBehaviour
         SceneManager.LoadScene(sceneName);
     }
 
+    private void DisplayObjective()
+    {
+        goalText.text = "Steal at least $" + lootRequirements[level] + " worth of loot.";
+        StartCoroutine(ObjectiveAnimation());
+    }
 
+    private IEnumerator ObjectiveAnimation()
+    {
+        yield return new WaitForSeconds(7f);
+        float duration = 1f;
+        float elapsed = 0f;
+        Vector3 startPos = new Vector3(objectiveText.transform.position.x, objectiveText.transform.position.y, 0);
+        Vector3 endPos = new Vector3(objectiveText.transform.position.x, objectiveText.transform.position.y - 40, 0);
+
+        while (elapsed < duration)
+        {
+            elapsed += Time.deltaTime;
+            float t = elapsed / duration;
+
+            objectiveText.transform.position = Vector3.Lerp(startPos, endPos, t);
+            goalText.transform.position = new Vector3(objectiveText.transform.position.x + 140, objectiveText.transform.position.y-6, 0);
+
+            yield return null;
+        }
+
+    }
+
+    public void DisplayDialogue(string dialogue)
+    {
+        dialogueObject.SetActive(true);
+
+        dialogueText.text = dialogue;
+    }
 }
