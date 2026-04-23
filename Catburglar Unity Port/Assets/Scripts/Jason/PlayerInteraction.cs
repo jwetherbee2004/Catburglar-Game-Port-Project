@@ -20,7 +20,6 @@ public class PlayerInteraction : MonoBehaviour
         if (uiShown && Input.GetKeyDown(KeyCode.X) && player.GetComponent<PlayerMovement>().canInteract)
         {
             currentInteractable.Interact(this);
-            player.GetComponent<PlayerMovement>().GetAnimator().SetTrigger("Steal");
             // Forces a UI refresh
             ShowHideUI();
         }
