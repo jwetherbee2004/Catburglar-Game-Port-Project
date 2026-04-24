@@ -32,8 +32,6 @@ public class SecurityCamera : MonoBehaviour
         if (cameraColliderRight != null)
             cameraColliderRight.gameObject.layer = LayerMask.NameToLayer("Ignore Raycast");
 
-        // if (cameraCollider == null)
-        //     cameraCollider = GetComponent<Collider2D>();
         if (animator == null)
             animator = GetComponent<Animator>();
 
@@ -165,9 +163,6 @@ public class SecurityCamera : MonoBehaviour
         isSwitching = true;
         playerInCamera = false;
 
-        // if (cameraCollider != null)
-        //     cameraCollider.enabled = false;
-
         string triggerName = facingLeft ? "SwitchToRight" : "SwitchToLeft";
         animator.SetTrigger(triggerName);
 
@@ -182,9 +177,6 @@ public class SecurityCamera : MonoBehaviour
 
         facingLeft = !facingLeft;
         animator.SetBool("FacingLeft", facingLeft);
-
-        // if (cameraCollider != null)
-        //     cameraCollider.enabled = true;
 
         isSwitching = false;
     }

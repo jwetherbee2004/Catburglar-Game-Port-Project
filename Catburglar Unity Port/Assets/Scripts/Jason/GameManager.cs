@@ -26,18 +26,6 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
     public void AddMoney(int amount)
     {
         loot += amount;
@@ -52,19 +40,19 @@ public class GameManager : MonoBehaviour
     public void EnterLight()
     {
         lightCount++;
-        Debug.Log("Entered light. Light count: " + lightCount);
+        //Debug.Log("Entered light. Light count: " + lightCount);
     }
 
     public void ExitLight()
     {
         lightCount = Mathf.Max(0, lightCount - 1);
-        Debug.Log("Exited light. Light count: " + lightCount);
+        //Debug.Log("Exited light. Light count: " + lightCount);
     }
 
     public void SetHidden(bool hidden)
     {
         isHidden = hidden;
-        Debug.Log("Player is " + (isHidden ? "hidden" : "visible"));
+        //Debug.Log("Player is " + (isHidden ? "hidden" : "visible"));
     }
 
     public void ResetLevel()
@@ -135,7 +123,7 @@ public class GameManager : MonoBehaviour
 
         Time.timeScale = 1f;
         string sceneName = SceneManager.GetActiveScene().name;
-        Debug.Log("Reloading scene: " + sceneName);
+        //Debug.Log("Reloading scene: " + sceneName);
         
         DestroyImmediate(canvasGO);
         DestroyImmediate(volumeGO);

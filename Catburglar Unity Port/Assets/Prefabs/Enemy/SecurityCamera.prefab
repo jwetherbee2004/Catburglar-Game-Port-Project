@@ -10,10 +10,10 @@ GameObject:
   m_Component:
   - component: {fileID: 2201653149590239154}
   - component: {fileID: 3339946564354393852}
-  - component: {fileID: 2982035136911490065}
+  - component: {fileID: 3753171681112833701}
   - component: {fileID: 3680405926937283464}
   m_Layer: 0
-  m_Name: security_camera_0
+  m_Name: security_camera_left
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -28,7 +28,7 @@ Transform:
   m_GameObject: {fileID: 5292156051600642832}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 2.1285367, y: -0.09507924, z: 4.4327207}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -75,9 +75,9 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingLayerID: -451567661
+  m_SortingLayer: 3
+  m_SortingOrder: 7
   m_Sprite: {fileID: -5208716482709753447, guid: 3671c489102761c45863811e044de960, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -89,7 +89,7 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!60 &2982035136911490065
+--- !u!60 &3753171681112833701
 PolygonCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -123,7 +123,7 @@ PolygonCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: 0, y: 0.5}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -135,14 +135,11 @@ PolygonCollider2D:
   m_AutoTiling: 0
   m_Points:
     m_Paths:
-    - - {x: -0.1875, y: 0.5}
-      - {x: -0.5, y: 0.25}
-      - {x: -3.1634302, y: -1.291341}
-      - {x: -2.8844361, y: -2.1989307}
-      - {x: -1.7391758, y: -2.5377855}
-      - {x: -0.0625, y: -0.375}
-      - {x: 0.5, y: 0.1875}
-      - {x: 0.5, y: 0.5}
+    - - {x: -1.0007839, y: -1.0004585}
+      - {x: -1.0007484, y: -2.9994392}
+      - {x: -2.000515, y: -2.9995918}
+      - {x: -2.0004854, y: 0.0009817313}
+      - {x: 0.000983851, y: 0.0011202991}
   m_UseDelaunayMesh: 0
 --- !u!95 &3680405926937283464
 Animator:
@@ -178,7 +175,7 @@ GameObject:
   - component: {fileID: 4581497216361421092}
   - component: {fileID: 268613077921219029}
   m_Layer: 0
-  m_Name: security_camera_2
+  m_Name: security_camera_right
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -193,7 +190,7 @@ Transform:
   m_GameObject: {fileID: 5973618856840841996}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 2.1485367, y: -0.07307924, z: 4.4327207}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -240,9 +237,9 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingLayerID: -451567661
+  m_SortingLayer: 3
+  m_SortingOrder: 7
   m_Sprite: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -288,26 +285,23 @@ PolygonCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: 0, y: 0.5}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1, y: 1}
-    newSize: {x: 1, y: 1}
-    adaptiveTilingThreshold: 0.5
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
   m_Points:
     m_Paths:
-    - - {x: 0.1875, y: 0.5}
-      - {x: 0.5, y: 0.25}
-      - {x: 3.16343, y: -1.291341}
-      - {x: 2.884436, y: -2.1989307}
-      - {x: 1.739176, y: -2.5377855}
-      - {x: 0.0625, y: -0.375}
-      - {x: -0.5, y: 0.1875}
-      - {x: -0.5, y: 0.5}
+    - - {x: 1.0001017, y: -0.99990815}
+      - {x: 0.99946, y: -2.9994392}
+      - {x: 2.000219, y: -2.9992745}
+      - {x: 1.9999912, y: 0.00020430237}
+      - {x: 0.000983851, y: 0.0011202991}
   m_UseDelaunayMesh: 0
 --- !u!1 &6769208095898259487
 GameObject:
@@ -335,7 +329,7 @@ Transform:
   m_GameObject: {fileID: 6769208095898259487}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 4.1814632, y: 0.11707924, z: -4.4327207}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -356,7 +350,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   animator: {fileID: 3680405926937283464}
-  cameraColliderLeft: {fileID: 2982035136911490065}
+  cameraColliderLeft: {fileID: 3753171681112833701}
   cameraColliderRight: {fileID: 268613077921219029}
   startFacingLeft: 1
   switchInterval: 4

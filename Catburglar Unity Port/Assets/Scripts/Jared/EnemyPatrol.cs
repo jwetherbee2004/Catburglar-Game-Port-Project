@@ -130,12 +130,14 @@ public class EnemyPatrol : MonoBehaviour
         if (!hit.collider)
         {
             lastDetectionResult = false;
+            //Debug.Log(hit.collider);
             return false;
         }
 
-        if (GameManager.Instance.isHidden)
+        if (GameManager.Instance.isHidden || hit.collider.CompareTag("Wall") || hit.collider.CompareTag("Ground"))
         {
             lastDetectionResult = false;
+            //Debug.Log(hit.collider.IsTouchingLayers(LayerMask.NameToLayer("Ground")));
             return false;
         }
 
