@@ -1,5 +1,6 @@
 using UnityEngine;
 using System.Collections;
+using Unity.VisualScripting;
 
 public class EnemyPatrol : MonoBehaviour
 {
@@ -42,6 +43,15 @@ public class EnemyPatrol : MonoBehaviour
     private float lastRaycastDistance;
     private bool lastDetectionResult;
 
+    [Header("Audio")]
+    [SerializeField] private AudioClip[] footsteps;
+    [SerializeField] private AudioClip spotted;
+    [SerializeField] private AudioClip caught;
+    [SerializeField] private AudioClip nevermind;
+    [SerializeField] private AudioClip sleep;
+
+    private AudioSource audioSource;
+
     private void Awake()
     {
         initScale = enemy.localScale;
@@ -60,6 +70,8 @@ public class EnemyPatrol : MonoBehaviour
     
     private void Update()
     {
+        audioSource = GetComponentInChildren<AudioSource>();
+
         if (isSleeper && !isSleeping)
         {
             if (positionAmt >= positionsUntilSleep)
@@ -149,6 +161,7 @@ public class EnemyPatrol : MonoBehaviour
     {
         isSpotting = true;
         animator.SetTrigger("Still");
+        PlaySpotted();
     
         yield return new WaitForSeconds(0.2f);
         
@@ -164,6 +177,7 @@ public class EnemyPatrol : MonoBehaviour
                 ShowBubble(1);
                 LockPlayerMovement();
                 player.GetComponent<PlayerMovement>().GetAnimator().SetTrigger("Caught");
+                PlayCaught();
                 GameManager.Instance.ResetLevel();
                 yield return new WaitForSeconds(2f);
             }
@@ -171,6 +185,7 @@ public class EnemyPatrol : MonoBehaviour
         
         HideBubble();
         isSpotting = false;
+        PlayNevermind();
     }
 
     private void ShowBubble(int spriteIndex)
@@ -266,6 +281,48 @@ public class EnemyPatrol : MonoBehaviour
             Gizmos.color = lastDetectionResult ? Color.red : Color.green;
             Gizmos.DrawLine(lastRaycastOrigin, raycastEnd);
             Gizmos.DrawWireSphere(raycastEnd, 0.1f);
+        }
+    }
+
+    // Audio methods
+    public void PlayFootstep()
+    {
+        if (footsteps.Length > 0 && audioSource != null)
+        {
+            AudioClip clip = footsteps[Random.Range(0, footsteps.Length)];
+            audioSource.PlayOneShot(clip);
+        }
+    }
+
+    public void PlaySpotted()
+    {
+        if (spotted != null && audioSource != null)
+        {
+            audioSource.PlayOneShot(spotted);
+        }
+    }
+
+    public void PlayCaught()
+    {
+        if (caught != null && audioSource != null)
+        {
+            audioSource.PlayOneShot(caught);
+        }
+    }
+
+    public void PlayNevermind()
+    {
+        if (nevermind != null && audioSource != null)
+        {
+            audioSource.PlayOneShot(nevermind);
+        }
+    }
+
+    public void PlaySleep()
+    {
+        if (sleep != null && audioSource != null)
+        {
+            audioSource.PlayOneShot(sleep);
         }
     }
 }

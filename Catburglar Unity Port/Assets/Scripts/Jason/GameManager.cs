@@ -15,6 +15,10 @@ public class GameManager : MonoBehaviour
     private bool isResettingLevel = false;
     public TimeTracker timeTracker { get; private set; }
 
+    [Header("Audio")]
+    private AudioSource audioSource;
+    [SerializeField] private AudioClip levelReset;
+
     private void Awake()
     {
         Instance = this;
@@ -29,7 +33,7 @@ public class GameManager : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        
+        audioSource = GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
@@ -71,6 +75,7 @@ public class GameManager : MonoBehaviour
     {
         if (isResettingLevel) return;
         isResettingLevel = true;
+        PlayLevelReset();
         StartCoroutine(FadeAndRestart());
     }
 
@@ -141,5 +146,13 @@ public class GameManager : MonoBehaviour
         DestroyImmediate(volumeGO);
         
         SceneManager.LoadScene(sceneName);
+    }
+
+    private void PlayLevelReset()
+    {
+        if (audioSource != null && levelReset != null)
+        {
+            audioSource.PlayOneShot(levelReset);
+        }
     }
 }
