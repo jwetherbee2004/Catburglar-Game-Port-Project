@@ -13,9 +13,16 @@ public class Gate : MonoBehaviour, IInteractable
     [SerializeField] private float fadeDuration = 1f;
     private Coroutine activeFade;
 
+    [Header("Audio")]
+    private AudioSource audioSource;
+    [SerializeField] private AudioClip doorOpen;
+    [SerializeField] private AudioClip elevatorOpen;
+
     void Awake()
     {
         animator = GetComponent<Animator>();
+        audioSource = GetComponent<AudioSource>();
+        Debug.Log("AudioSource found: " + (audioSource != null));
     }
 
     public void Interact(PlayerInteraction player)
@@ -90,5 +97,21 @@ public class Gate : MonoBehaviour, IInteractable
     {
         borderActive = !borderActive;
         border.SetActive(borderActive);
+    }
+
+    private void PlayOpen()
+    {
+        // check the tag if it's an elevator or regular door to play the correct sound
+        if (audioSource != null)
+        {
+            if (gameObject.CompareTag("Elevator") && elevatorOpen != null)
+            {
+                audioSource.PlayOneShot(elevatorOpen);
+            }
+            else if (doorOpen != null)
+            {
+                audioSource.PlayOneShot(doorOpen);
+            }
+        }
     }
 }

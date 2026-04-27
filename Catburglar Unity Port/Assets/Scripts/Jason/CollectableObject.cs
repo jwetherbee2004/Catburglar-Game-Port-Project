@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 public class CollectableObject : MonoBehaviour, IInteractable
@@ -20,10 +21,9 @@ public class CollectableObject : MonoBehaviour, IInteractable
     public void Interact(PlayerInteraction player)
     {
         GameManager.Instance.AddMoney(value);
-        player.GetComponent<PlayerMovement>().GetAnimator().SetTrigger("Steal");
-        // In the future this method should be called through the stealing animation
+        PlayerMovement pm = player.GetComponent<PlayerMovement>();
+        pm.PlayStealAndUnlock();
         player.ForceUIChange();
-        // In the future this should be destroyed after the stealing animation
-        // Destroy(gameObject);
     }
+
 }

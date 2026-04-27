@@ -8,6 +8,8 @@ TagManager:
   - Wall
   - Platform
   - WinZone
+  - Door
+  - Elevator
   layers:
   - Default
   - TransparentFX

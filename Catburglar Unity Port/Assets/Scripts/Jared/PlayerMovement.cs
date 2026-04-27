@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
@@ -30,11 +31,18 @@ public class PlayerMovement : MonoBehaviour
     private float rollRecoveryDuration = 0.1f;
     private bool isMovementLocked = false;
 
+    [Header("Audio")]
+    public AudioSource audioSource;
+    [SerializeField] private AudioClip[] footsteps;
+    [SerializeField] private AudioClip roll;
+    [SerializeField] private AudioClip land;
+
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
         spriteRenderer = GetComponent<SpriteRenderer>();
+        audioSource = GetComponent<AudioSource>();
     }
 
     void Update()
@@ -74,6 +82,27 @@ public class PlayerMovement : MonoBehaviour
     public void UnlockMovement()
     {
         isMovementLocked = false;
+    }
+
+    public void PlayStealAndUnlock()
+    {
+        LockMovement();
+        StartCoroutine(StealCoroutine());
+    }
+
+    private IEnumerator StealCoroutine()
+    {
+        animator.SetTrigger("Steal");
+
+        yield return null;
+        yield return null;
+        while (animator.IsInTransition(0))
+            yield return null;
+
+        float clipLength = animator.GetCurrentAnimatorStateInfo(0).length;
+        yield return new WaitForSeconds(clipLength);
+
+        UnlockMovement();
     }
 
     bool CheckGrounded()
@@ -209,6 +238,32 @@ public class PlayerMovement : MonoBehaviour
                 // Player_Roll has 13 frames, frame 6 = 6/13 ≈ 0.4615 normalized time
                 animator.Play("Player_Roll", 0, 6f / 13f);
             }
+        }
+    }
+
+    // Audio methods called from animation events
+    public void PlayFootstep()
+    {
+        if (footsteps.Length > 0 && audioSource != null)
+        {
+            AudioClip clip = footsteps[Random.Range(0, footsteps.Length)];
+            audioSource.PlayOneShot(clip);
+        }
+    }
+
+    public void PlayRoll()
+    {
+        if (roll != null && audioSource != null)
+        {
+            audioSource.PlayOneShot(roll);
+        }
+    }
+
+    public void PlayLand()
+    {
+        if (land != null && audioSource != null)
+        {
+            audioSource.PlayOneShot(land);
         }
     }
 }

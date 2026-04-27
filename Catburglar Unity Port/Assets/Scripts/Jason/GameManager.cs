@@ -15,6 +15,10 @@ public class GameManager : MonoBehaviour
     private bool isResettingLevel = false;
     public TimeTracker timeTracker { get; private set; }
 
+    [Header("Audio")]
+    private AudioSource audioSource;
+    [SerializeField] private AudioClip levelReset;
+
     private void Awake()
     {
         Instance = this;
@@ -24,6 +28,18 @@ public class GameManager : MonoBehaviour
         {
             timeTracker = gameObject.AddComponent<TimeTracker>();
         }
+    }
+
+    // Start is called once before the first execution of Update after the MonoBehaviour is created
+    void Start()
+    {
+        audioSource = GetComponent<AudioSource>();
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+        
     }
 
     public void AddMoney(int amount)
@@ -40,25 +56,26 @@ public class GameManager : MonoBehaviour
     public void EnterLight()
     {
         lightCount++;
-        //Debug.Log("Entered light. Light count: " + lightCount);
+        Debug.Log("Entered light. Light count: " + lightCount);
     }
 
     public void ExitLight()
     {
         lightCount = Mathf.Max(0, lightCount - 1);
-        //Debug.Log("Exited light. Light count: " + lightCount);
+        Debug.Log("Exited light. Light count: " + lightCount);
     }
 
     public void SetHidden(bool hidden)
     {
         isHidden = hidden;
-        //Debug.Log("Player is " + (isHidden ? "hidden" : "visible"));
+        Debug.Log("Player is " + (isHidden ? "hidden" : "visible"));
     }
 
     public void ResetLevel()
     {
         if (isResettingLevel) return;
         isResettingLevel = true;
+        PlayLevelReset();
         StartCoroutine(FadeAndRestart());
     }
 
@@ -123,11 +140,19 @@ public class GameManager : MonoBehaviour
 
         Time.timeScale = 1f;
         string sceneName = SceneManager.GetActiveScene().name;
-        //Debug.Log("Reloading scene: " + sceneName);
+        Debug.Log("Reloading scene: " + sceneName);
         
         DestroyImmediate(canvasGO);
         DestroyImmediate(volumeGO);
         
         SceneManager.LoadScene(sceneName);
+    }
+
+    private void PlayLevelReset()
+    {
+        if (audioSource != null && levelReset != null)
+        {
+            audioSource.PlayOneShot(levelReset);
+        }
     }
 }

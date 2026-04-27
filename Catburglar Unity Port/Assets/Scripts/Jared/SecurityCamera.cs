@@ -17,6 +17,14 @@ public class SecurityCamera : MonoBehaviour
     private float blinkingDuration = 0f;
     private bool isCatching = false;
 
+    [Header("Audio")]
+    private AudioSource audioSource;
+    [SerializeField] private AudioClip sight;
+    private bool isSightSoundPlaying = false;
+    [SerializeField] private AudioClip caught;
+    [SerializeField] private AudioClip nevermind;
+    [SerializeField] private AudioClip cameraMove;
+
     void Awake()
     {
         if (player == null)
@@ -25,6 +33,8 @@ public class SecurityCamera : MonoBehaviour
 
     void Start()
     {
+        audioSource = GetComponentInChildren<AudioSource>();
+
         gameObject.layer = LayerMask.NameToLayer("Ignore Raycast");
         
         if (cameraColliderLeft != null)
@@ -82,6 +92,7 @@ public class SecurityCamera : MonoBehaviour
             if (col.CompareTag("Player"))
             {
                 playerDetected = true;
+                PlaySight();
                 break;
             }
         }
@@ -126,10 +137,11 @@ public class SecurityCamera : MonoBehaviour
         
         LockPlayerMovement();
         player.GetComponent<PlayerMovement>().GetAnimator().SetTrigger("Caught");
+        PlayCaught();
         GameManager.Instance.ResetLevel();
         
         yield return new WaitForSeconds(2f);
-        
+        PlayNevermind();
         isCatching = false;
     }
 
@@ -190,5 +202,41 @@ public class SecurityCamera : MonoBehaviour
         Rigidbody2D playerRb = player.GetComponent<Rigidbody2D>();
         if (playerRb != null)
             playerRb.linearVelocity = Vector2.zero;
+    }
+
+    // Audio methods
+    public void PlaySight()
+    {
+        // Only play the sight sound if it's not already playing to prevent overlap
+        if (!isSightSoundPlaying && audioSource != null && sight != null && GameManager.Instance.inLight && !GameManager.Instance.isHidden)
+        {
+            audioSource.PlayOneShot(sight);
+            isSightSoundPlaying = true;
+            StartCoroutine(ResetSightSoundFlag());
+        }
+    }
+
+    private IEnumerator ResetSightSoundFlag()
+    {
+        yield return new WaitForSeconds(sight.length);
+        isSightSoundPlaying = false;
+    }
+
+    public void PlayCaught()
+    {
+        if (audioSource != null && caught != null)
+            audioSource.PlayOneShot(caught);
+    }
+
+    public void PlayNevermind()
+    {
+        if (audioSource != null && nevermind != null)
+            audioSource.PlayOneShot(nevermind);
+    }
+
+    public void PlayCameraMove()
+    {
+        if (audioSource != null && cameraMove != null)
+            audioSource.PlayOneShot(cameraMove);
     }
 }
