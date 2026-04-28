@@ -34,6 +34,7 @@ public class PlayerMovement : MonoBehaviour
     private bool wasUnderPlatform = false;
     private float platformExitDelay = 0.3f;
     private float platformExitTimer = 0f;
+    private bool isPlayingSpecialAnimation = false;  // Flag for Steal/Search animations
     
     [Header("Roll Hitbox")]
     [SerializeField] private Vector2 rolledHitboxSize = new Vector2(0.8f, 0.8f);
@@ -117,6 +118,7 @@ public class PlayerMovement : MonoBehaviour
     public void PlayStealAndUnlock()
     {
         LockMovement();
+        isPlayingSpecialAnimation = true;
         StartCoroutine(StealCoroutine());
     }
 
@@ -132,6 +134,36 @@ public class PlayerMovement : MonoBehaviour
         float clipLength = animator.GetCurrentAnimatorStateInfo(0).length;
         yield return new WaitForSeconds(clipLength);
 
+        isPlayingSpecialAnimation = false;
+        UnlockMovement();
+    }
+
+    public void PlaySearch()
+    {
+        LockMovement();
+        isPlayingSpecialAnimation = true;
+        StartCoroutine(SearchCoroutine());
+    }
+
+    private IEnumerator SearchCoroutine()
+    {
+        Debug.Log("SearchCoroutine started");
+        animator.SetTrigger("Search");
+        Debug.Log("Search trigger set");
+
+        yield return null;
+        yield return null;
+        Debug.Log("Waiting for transition...");
+        while (animator.IsInTransition(0))
+            yield return null;
+
+        Debug.Log("Transition complete, getting clip length");
+        float clipLength = animator.GetCurrentAnimatorStateInfo(0).length;
+        Debug.Log($"Search clip length: {clipLength}");
+        yield return new WaitForSeconds(clipLength);
+
+        Debug.Log("SearchCoroutine finished");
+        isPlayingSpecialAnimation = false;
         UnlockMovement();
     }
 
@@ -371,7 +403,7 @@ public class PlayerMovement : MonoBehaviour
             }
         }
 
-        if (animator != null)
+        if (animator != null && !isPlayingSpecialAnimation)
         {
             animator.SetBool("isMoving", moveInput != 0f && !isCurrentlyRolling);
             animator.SetBool("isCrouching", isCrouching && !isCurrentlyRolling);
