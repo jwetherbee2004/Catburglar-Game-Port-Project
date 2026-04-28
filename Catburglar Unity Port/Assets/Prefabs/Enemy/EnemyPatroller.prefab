@@ -34,6 +34,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 6638625816348075916}
   - {fileID: 1012872628342249829}
   m_Father: {fileID: 5434463185666546297}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -232,7 +233,6 @@ Transform:
   - {fileID: 2749243656282196651}
   - {fileID: 8287134640628120277}
   - {fileID: 7397314759498054406}
-  - {fileID: 6638625816348075916}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &5781392250576060099
@@ -260,12 +260,17 @@ MonoBehaviour:
   sleepTime: 5
   player: {fileID: 0}
   raycastDistance: 14
+  horizontalDetectionRange: 20
+  verticalDetectionRange: 1.7
   lightLayer:
     serializedVersion: 2
     m_Bits: 1024
   playerLayer:
     serializedVersion: 2
     m_Bits: 192
+  platformLayer:
+    serializedVersion: 2
+    m_Bits: 512
   questionMarkDuration: 1
   footsteps:
   - {fileID: 8300000, guid: 6d84799150a007c4e88a21a6cb4da861, type: 3}
@@ -450,11 +455,11 @@ Transform:
   m_GameObject: {fileID: 9030862090378080748}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -10.898, y: -0.8063846, z: 0.005407374}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 5434463185666546297}
+  m_Father: {fileID: 7397314759498054406}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!82 &1565557456205133561
 AudioSource:
@@ -513,7 +518,7 @@ AudioSource:
     m_Curve:
     - serializedVersion: 3
       time: 0
-      value: 0
+      value: 0.6
       inSlope: 0
       outSlope: 0
       tangentMode: 0

@@ -23,8 +23,11 @@ public class EnemyPatrol : MonoBehaviour
     [Header("Detection Settings")]
     public Transform player;
     public float raycastDistance = 10f;
+    public float horizontalDetectionRange = 20f;  // Max horizontal distance to detect player
+    public float verticalDetectionRange = 5f;    // Max vertical distance to detect player
     public LayerMask lightLayer;
     public LayerMask playerLayer;
+    public LayerMask platformLayer;
     public float questionMarkDuration = 1.5f;
     
     private Vector3 initScale;
@@ -125,6 +128,20 @@ public class EnemyPatrol : MonoBehaviour
             return false;
         }
 
+        float horizontalDistance = Mathf.Abs(player.position.x - enemy.position.x);
+        if (horizontalDistance > horizontalDetectionRange)
+        {
+            lastDetectionResult = false;
+            return false;
+        }
+
+        float verticalDistance = Mathf.Abs(player.position.y - enemy.position.y);
+        if (verticalDistance > verticalDetectionRange)
+        {
+            lastDetectionResult = false;
+            return false;
+        }
+
         bool playerInFront = (currentDirection > 0 && player.position.x > enemy.position.x) ||
                             (currentDirection < 0 && player.position.x < enemy.position.x);
         
@@ -137,6 +154,16 @@ public class EnemyPatrol : MonoBehaviour
         lastRaycastOrigin = enemy.position;
         lastRaycastDirection = directionToPlayer;
         lastRaycastDistance = distanceToPlayer;
+
+        RaycastHit2D platformHit = Physics2D.Raycast(enemy.position, directionToPlayer, distanceToPlayer, platformLayer);
+        if (platformHit.collider != null)
+        {
+            if (platformHit.distance < distanceToPlayer)
+            {
+                lastDetectionResult = false;
+                return false;
+            }
+        }
 
         RaycastHit2D hit = Physics2D.Raycast(enemy.position, directionToPlayer, distanceToPlayer, playerLayer);
         if (!hit.collider)
@@ -277,12 +304,48 @@ public class EnemyPatrol : MonoBehaviour
 
     private void OnDrawGizmos()
     {
-        if (lastRaycastDistance > 0 && enemy != null)
+        if (enemy == null)
+            return;
+
+        // Gizmos.color = new Color(1f, 1f, 0f, 0.3f);
+        // Vector3 boxSize = new Vector3(horizontalDetectionRange * 2, verticalDetectionRange * 2, 0.1f);
+        // Gizmos.DrawCube(enemy.position, boxSize);
+        
+        // Gizmos.color = Color.yellow;
+        // Vector3 topLeft = enemy.position + new Vector3(-horizontalDetectionRange, verticalDetectionRange, 0);
+        // Vector3 topRight = enemy.position + new Vector3(horizontalDetectionRange, verticalDetectionRange, 0);
+        // Vector3 bottomLeft = enemy.position + new Vector3(-horizontalDetectionRange, -verticalDetectionRange, 0);
+        // Vector3 bottomRight = enemy.position + new Vector3(horizontalDetectionRange, -verticalDetectionRange, 0);
+        
+        // Gizmos.DrawLine(topLeft, topRight);
+        // Gizmos.DrawLine(topRight, bottomRight);
+        // Gizmos.DrawLine(bottomRight, bottomLeft);
+        // Gizmos.DrawLine(bottomLeft, topLeft);
+
+        // Gizmos.color = Color.cyan;
+        // DrawCircle(enemy.position, raycastDistance, 20);
+
+        // Draw last raycast line
+        if (lastRaycastDistance > 0)
         {
             Vector3 raycastEnd = lastRaycastOrigin + lastRaycastDirection * lastRaycastDistance;
             Gizmos.color = lastDetectionResult ? Color.red : Color.green;
             Gizmos.DrawLine(lastRaycastOrigin, raycastEnd);
             Gizmos.DrawWireSphere(raycastEnd, 0.1f);
+        }
+    }
+
+    private void DrawCircle(Vector3 center, float radius, int segments)
+    {
+        float angleStep = 360f / segments;
+        Vector3 prevPoint = center + new Vector3(radius, 0, 0);
+
+        for (int i = 1; i <= segments; i++)
+        {
+            float angle = i * angleStep * Mathf.Deg2Rad;
+            Vector3 newPoint = center + new Vector3(Mathf.Cos(angle) * radius, Mathf.Sin(angle) * radius, 0);
+            Gizmos.DrawLine(prevPoint, newPoint);
+            prevPoint = newPoint;
         }
     }
 

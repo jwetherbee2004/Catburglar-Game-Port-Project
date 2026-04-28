@@ -938,7 +938,7 @@ GameObject:
   - component: {fileID: 765617398}
   - component: {fileID: 765617397}
   - component: {fileID: 765617396}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Light 2D (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1029,7 +1029,7 @@ MonoBehaviour:
   m_Intensity: 5
   m_LightVolumeIntensity: 1
   m_LightVolumeEnabled: 0
-  m_ApplyToSortingLayers: 00000000553a717a
+  m_ApplyToSortingLayers: 00000000dde608850d557522d39f15e5
   m_LightCookieSprite: {fileID: 0}
   m_DeprecatedPointLightCookieSprite: {fileID: 0}
   m_LightOrder: 0
@@ -1729,7 +1729,7 @@ MonoBehaviour:
   m_Intensity: 0.5
   m_LightVolumeIntensity: 1
   m_LightVolumeEnabled: 0
-  m_ApplyToSortingLayers: 00000000553a717a
+  m_ApplyToSortingLayers: 00000000dde608850d557522d39f15e5
   m_LightCookieSprite: {fileID: 0}
   m_DeprecatedPointLightCookieSprite: {fileID: 0}
   m_LightOrder: 0
@@ -1957,7 +1957,7 @@ GameObject:
   - component: {fileID: 1590323975}
   - component: {fileID: 1590323978}
   - component: {fileID: 1590323977}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Light 2D
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1984,7 +1984,7 @@ MonoBehaviour:
   m_Intensity: 5
   m_LightVolumeIntensity: 1
   m_LightVolumeEnabled: 0
-  m_ApplyToSortingLayers: 00000000553a717a
+  m_ApplyToSortingLayers: 00000000dde608850d557522d39f15e5
   m_LightCookieSprite: {fileID: 0}
   m_DeprecatedPointLightCookieSprite: {fileID: 0}
   m_LightOrder: 0
@@ -2921,11 +2921,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5434463185666546297, guid: 9551b77c69ec9164f8efb324b30e059c, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0.1083673
+      value: -10.76
       objectReference: {fileID: 0}
     - target: {fileID: 5434463185666546297, guid: 9551b77c69ec9164f8efb324b30e059c, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.06612242
+      value: -1.28
       objectReference: {fileID: 0}
     - target: {fileID: 5434463185666546297, guid: 9551b77c69ec9164f8efb324b30e059c, type: 3}
       propertyPath: m_LocalPosition.z
@@ -3002,11 +3002,11 @@ PrefabInstance:
       objectReference: {fileID: 1910437772}
     - target: {fileID: 6701695181543743130, guid: 54eb96b4c6b31f041a570a7c00c0da84, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: -1.06
       objectReference: {fileID: 0}
     - target: {fileID: 6701695181543743130, guid: 54eb96b4c6b31f041a570a7c00c0da84, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.77
+      value: -1.3
       objectReference: {fileID: 0}
     - target: {fileID: 6701695181543743130, guid: 54eb96b4c6b31f041a570a7c00c0da84, type: 3}
       propertyPath: m_LocalPosition.z
