@@ -15,6 +15,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] private TextMeshProUGUI goalText;
     [SerializeField] private GameObject dialogueObject;
     [SerializeField] private TextMeshProUGUI dialogueText;
+    [SerializeField] private PlayerMovement player;
     private Vector3 moneyTextStart = new Vector3(25, 560, 0);
     private Vector3 moneyTextEnd = new Vector3 (25, 536, 0);
     private int loot = 0;
@@ -209,7 +210,7 @@ public class GameManager : MonoBehaviour
     public void DisplayDialogue(string dialogue)
     {
         dialogueObject.SetActive(true);
-
+        player.LockMovement();
         dialogueText.text = dialogue;
     }
 }

@@ -65,6 +65,26 @@ public class PlayerInteraction : MonoBehaviour
             {
                 gate.ShowHideBorder();
             }
+            return;
+        }
+        var otherinteractable = other.GetComponent<DialoguePoint>();
+        if (otherinteractable != null)
+        {
+            if (!otherinteractable.used)
+            {
+                GameManager.Instance.DisplayDialogue(otherinteractable.dialogueText);
+                otherinteractable.used = true;
+            }
+            return;
+        }
+        var yetanotherinteractable = other.GetComponent<TipPoint>();
+        if (yetanotherinteractable != null)
+        {
+            if (!yetanotherinteractable.used)
+            {
+                yetanotherinteractable.SetTip();
+            }
+            return;
         }
     }
 
