@@ -6,8 +6,11 @@ TagManager:
   tags:
   - Ground
   - Wall
+  - Platform
   - WinZone
   - Dialogue
+  - Door
+  - Elevator
   layers:
   - Default
   - TransparentFX
@@ -18,8 +21,8 @@ TagManager:
   - Ground
   - Player
   - Enemies
-  - 
-  - 
+  - Platform
+  - Lighting
   - 
   - 
   - 
@@ -42,14 +45,17 @@ TagManager:
   - 
   - 
   m_SortingLayers:
-  - name: Object
-    uniqueID: 3843399635
-    locked: 0
   - name: Default
     uniqueID: 0
     locked: 0
-  - name: Hideable
-    uniqueID: 2054240853
+  - name: Background
+    uniqueID: 2231953117
+    locked: 0
+  - name: Walls
+    uniqueID: 578114829
+    locked: 0
+  - name: Object
+    uniqueID: 3843399635
     locked: 0
   m_RenderingLayers:
   - Default

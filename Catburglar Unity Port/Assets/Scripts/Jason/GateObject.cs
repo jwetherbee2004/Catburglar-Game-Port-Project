@@ -12,10 +12,62 @@ public class Gate : MonoBehaviour, IInteractable
     private bool borderActive = false;
     [SerializeField] private float fadeDuration = 1f;
     private Coroutine activeFade;
+    
+    private bool playerInDoor = false;
+    private Collider2D doorTrigger;
+
+    [Header("Audio")]
+    private AudioSource audioSource;
+    [SerializeField] private AudioClip doorOpen;
+    [SerializeField] private AudioClip elevatorOpen;
 
     void Awake()
     {
         animator = GetComponent<Animator>();
+        audioSource = GetComponent<AudioSource>();
+        
+        // Ensure there's a trigger collider for door detection
+        doorTrigger = GetComponent<Collider2D>();
+        if (doorTrigger != null)
+        {
+            doorTrigger.isTrigger = true;
+        }
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.CompareTag("Player"))
+        {
+            playerInDoor = true;
+            playerObject = collision.gameObject;
+            
+            // Notify camera to pan towards connected gate if it's far enough away
+            if (connectedGate != null && playerObject != null)
+            {
+                float distanceToConnectedGate = Vector3.Distance(playerObject.transform.position, connectedGate.transform.position);
+                
+                CameraController camera = FindObjectOfType<CameraController>();
+                if (camera != null)
+                {
+                    camera.PanTowardGate(connectedGate.transform.position, distanceToConnectedGate);
+                }
+            }
+        }
+    }
+
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        if (collision.CompareTag("Player"))
+        {
+            playerInDoor = false;
+            
+            // Notify camera to return to normal
+            CameraController camera = FindObjectOfType<CameraController>();
+            if (camera != null)
+            {
+                camera.ReturnToCenterCamera();
+            }
+        }
     }
 
     public void Interact(PlayerInteraction player)
@@ -90,5 +142,21 @@ public class Gate : MonoBehaviour, IInteractable
     {
         borderActive = !borderActive;
         border.SetActive(borderActive);
+    }
+
+    private void PlayOpen()
+    {
+        // check the tag if it's an elevator or regular door to play the correct sound
+        if (audioSource != null)
+        {
+            if (gameObject.CompareTag("Elevator") && elevatorOpen != null)
+            {
+                audioSource.PlayOneShot(elevatorOpen);
+            }
+            else if (doorOpen != null)
+            {
+                audioSource.PlayOneShot(doorOpen);
+            }
+        }
     }
 }

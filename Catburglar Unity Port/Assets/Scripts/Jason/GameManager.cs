@@ -6,6 +6,7 @@ using UnityEngine.Rendering.Universal;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using static Unity.Burst.Intrinsics.X86.Avx;
+using TMPro;
 
 public class GameManager : MonoBehaviour
 {
@@ -28,6 +29,17 @@ public class GameManager : MonoBehaviour
     private bool isResettingLevel = false;    
     public TimeTracker timeTracker { get; private set; }
 
+    [Header("Audio")]
+    private AudioSource audioSource;
+    [SerializeField] private AudioClip levelReset;
+    [SerializeField] private AudioClip inLightSound;
+    [SerializeField] private AudioClip outOfLightSound;
+
+    [Header("Light Indicator")]
+    [SerializeField] private Image Eye1;
+    [SerializeField] private Image Eye2;
+    [SerializeField] private TextMeshProUGUI LightText;
+
     private void Awake()
     {
         Instance = this;
@@ -42,12 +54,24 @@ public class GameManager : MonoBehaviour
     void Start()
     {
         DisplayObjective();
+        audioSource = GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+        if(inLight)
+        {
+            Eye1.gameObject.SetActive(true);
+            Eye2.gameObject.SetActive(true);
+            LightText.text = "IN LIGHT";
+        }
+        else
+        {
+            Eye1.gameObject.SetActive(false);
+            Eye2.gameObject.SetActive(false);
+            LightText.text = "IN SHADOW";
+        }
     }
 
     public int GetLoot()
@@ -90,12 +114,21 @@ public class GameManager : MonoBehaviour
     {
         lightCount++;
         Debug.Log("Entered light. Light count: " + lightCount);
+
+        if (audioSource != null && inLightSound != null && lightCount == 1)
+        {
+            audioSource.PlayOneShot(inLightSound);
+        }
     }
 
     public void ExitLight()
     {
         lightCount = Mathf.Max(0, lightCount - 1);
         Debug.Log("Exited light. Light count: " + lightCount);
+        if (audioSource != null && outOfLightSound != null && lightCount == 0)
+        {
+            audioSource.PlayOneShot(outOfLightSound);
+        }
     }
 
     public void SetHidden(bool hidden)
@@ -108,6 +141,11 @@ public class GameManager : MonoBehaviour
     {
         if (isResettingLevel) return;
         isResettingLevel = true;
+        
+        // Pause music before level reset
+        AudioManager.Instance.PauseMusic();
+        
+        PlayLevelReset();
         StartCoroutine(FadeAndRestart());
     }
 
@@ -212,5 +250,13 @@ public class GameManager : MonoBehaviour
         dialogueObject.SetActive(true);
         player.LockMovement();
         dialogueText.text = dialogue;
+    }
+    
+    private void PlayLevelReset()
+    {
+        if (audioSource != null && levelReset != null)
+        {
+            audioSource.PlayOneShot(levelReset);
+        }
     }
 }

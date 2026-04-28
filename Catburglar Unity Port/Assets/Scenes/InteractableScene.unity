@@ -1351,6 +1351,7 @@ MonoBehaviour:
   player: {fileID: 1988491335}
   lightCount: 0
   isHidden: 0
+  levelReset: {fileID: 0}
 --- !u!4 &1192061819
 Transform:
   m_ObjectHideFlags: 0
@@ -2765,7 +2766,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -451567661
-  m_SortingLayer: -1
+  m_SortingLayer: 3
   m_SortingOrder: 0
   m_Sprite: {fileID: 728959511, guid: 65e30db4333bd8f40ad5d506eb294461, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -2895,16 +2896,43 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4d46007e899c56249b91f4e56409fbae, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_slideMovement:
+    <maxIterations>k__BackingField: 3
+    <surfaceSlideAngle>k__BackingField: 90
+    <gravitySlipAngle>k__BackingField: 90
+    <surfaceUp>k__BackingField: {x: 0, y: 1}
+    <surfaceAnchor>k__BackingField: {x: 0, y: -1}
+    <gravity>k__BackingField: {x: 0, y: -9.81}
+    <startPosition>k__BackingField: {x: 0, y: 0}
+    <selectedCollider>k__BackingField: {fileID: 0}
+    <layerMask>k__BackingField:
+      serializedVersion: 2
+      m_Bits: 4294967295
+    <useLayerMask>k__BackingField: 0
+    <useStartPosition>k__BackingField: 0
+    <useNoMove>k__BackingField: 0
+    <useSimulationMove>k__BackingField: 0
+    <useAttachedTriggers>k__BackingField: 0
   moveSpeed: 6
   rollDistance: 8
   rollDuration: 1
   playerIsCaught: 0
   isCurrentlyRolling: 0
   canInteract: 1
+  isUnderPlatform: 0
   groundLayer:
     serializedVersion: 2
     m_Bits: 64
+  platformLayer:
+    serializedVersion: 2
+    m_Bits: 0
+  platformText: Platform
+  playerText: Player
   groundCheckDistance: 0.5
+  audioSource: {fileID: 0}
+  footsteps: []
+  roll: {fileID: 0}
+  land: {fileID: 0}
 --- !u!50 &1988491336
 Rigidbody2D:
   serializedVersion: 5
