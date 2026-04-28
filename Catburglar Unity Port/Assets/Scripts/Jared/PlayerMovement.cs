@@ -37,10 +37,17 @@ public class PlayerMovement : MonoBehaviour
     
     [Header("Roll Hitbox")]
     [SerializeField] private Vector2 rolledHitboxSize = new Vector2(0.8f, 0.8f);
+    [SerializeField] private float ceilingCheckDistance = 1;
     private Collider2D playerCollider;
     private Vector2 originalHitboxSize;
     private Vector2 originalHitboxOffset;
     private bool isHitboxShrunk = false;
+    
+    // Debug visualization for ceiling raycast
+    private Vector2 ceilLeftOrigin;
+    private Vector2 ceilRightOrigin;
+    private bool ceilLeftHit = false;
+    private bool ceilRightHit = false;
 
     [Header("Audio")]
     public AudioSource audioSource;
@@ -190,7 +197,39 @@ public class PlayerMovement : MonoBehaviour
         if (rollTimer > 0f)
             rollTimer -= Time.deltaTime;
 
-        isCurrentlyRolling = rollTimer > 0f;
+        // Check for ceiling above. If obstructed, keep rolling even after timer expires
+        bool ceilingAbove = false;
+        if (isHitboxShrunk)
+        {
+            float topY = playerCollider.bounds.max.y;
+            ceilLeftOrigin = new Vector2(rb.position.x - rolledHitboxSize.x * 0.4f, topY);
+            ceilRightOrigin = new Vector2(rb.position.x + rolledHitboxSize.x * 0.4f, topY);
+            
+            RaycastHit2D ceilLeft  = Physics2D.Raycast(ceilLeftOrigin, Vector2.up, ceilingCheckDistance, groundLayer);
+            RaycastHit2D ceilRight = Physics2D.Raycast(ceilRightOrigin, Vector2.up, ceilingCheckDistance, groundLayer);
+            
+            ceilLeftHit = ceilLeft.collider != null;
+            ceilRightHit = ceilRight.collider != null;
+            ceilingAbove = ceilLeftHit || ceilRightHit;
+        }
+
+        if (rollTimer <= 0f && ceilingAbove)
+        {
+            rollTimer = 0.05f;
+        }
+
+        isCurrentlyRolling = rollTimer > 0f || ceilingAbove;
+        
+        // Loop animation frames 2-4 while under ceiling
+        if (isCurrentlyRolling && ceilingAbove && animator != null)
+        {
+            float normalizedTime = animator.GetCurrentAnimatorStateInfo(0).normalizedTime % 1f;
+            // Frame 4 ends at 5/13, so reset when past that point
+            if (normalizedTime > 5f / 13f)
+            {
+                animator.Play("Player_Roll", 0, 2f / 13f);
+            }
+        }
         
         // Shrink hitbox while rolling, restore when done
         if (isCurrentlyRolling && !isHitboxShrunk)
@@ -371,6 +410,40 @@ public class PlayerMovement : MonoBehaviour
         if (land != null && audioSource != null)
         {
             audioSource.PlayOneShot(land);
+        }
+    }
+
+    private void OnDrawGizmos()
+    {
+        // Draw ceiling raycast visualization
+        if (Application.isPlaying && isHitboxShrunk)
+        {
+            // Left raycast
+            Gizmos.color = ceilLeftHit ? Color.red : Color.cyan;
+            Gizmos.DrawLine(ceilLeftOrigin, ceilLeftOrigin + Vector2.up * ceilingCheckDistance);
+            Gizmos.DrawWireCube(ceilLeftOrigin + Vector2.up * ceilingCheckDistance * 0.5f, new Vector3(0.1f, ceilingCheckDistance, 0.1f));
+            
+            // Right raycast
+            Gizmos.color = ceilRightHit ? Color.red : Color.cyan;
+            Gizmos.DrawLine(ceilRightOrigin, ceilRightOrigin + Vector2.up * ceilingCheckDistance);
+            Gizmos.DrawWireCube(ceilRightOrigin + Vector2.up * ceilingCheckDistance * 0.5f, new Vector3(0.1f, ceilingCheckDistance, 0.1f));
+        }
+        else if (!Application.isPlaying)
+        {
+            // Show detection range in editor when not playing
+            if (playerCollider != null && rolledHitboxSize.y > 0)
+            {
+                float topY = playerCollider.bounds.max.y;
+                Vector2 leftStart = new Vector2(transform.position.x - rolledHitboxSize.x * 0.4f, topY);
+                Vector2 rightStart = new Vector2(transform.position.x + rolledHitboxSize.x * 0.4f, topY);
+                
+                Gizmos.color = Color.cyan;
+                Gizmos.DrawLine(leftStart, leftStart + Vector2.up * ceilingCheckDistance);
+                Gizmos.DrawWireCube(leftStart + Vector2.up * ceilingCheckDistance * 0.5f, new Vector3(0.1f, ceilingCheckDistance, 0.1f));
+                
+                Gizmos.DrawLine(rightStart, rightStart + Vector2.up * ceilingCheckDistance);
+                Gizmos.DrawWireCube(rightStart + Vector2.up * ceilingCheckDistance * 0.5f, new Vector3(0.1f, ceilingCheckDistance, 0.1f));
+            }
         }
     }
 }

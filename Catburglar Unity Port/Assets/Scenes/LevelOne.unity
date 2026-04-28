@@ -3295,6 +3295,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 8300000, guid: 8ebe3fe306455b648beaeb982cf55cb3, type: 3}
     - target: {fileID: 3878870121443701824, guid: 234ca6ff3453a95409ad82e9a5647947, type: 3}
+      propertyPath: ceilingCheckDistance
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3878870121443701824, guid: 234ca6ff3453a95409ad82e9a5647947, type: 3}
       propertyPath: footsteps.Array.size
       value: 3
       objectReference: {fileID: 0}
@@ -3336,11 +3340,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8113719651079510958, guid: 234ca6ff3453a95409ad82e9a5647947, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 17.91
+      value: -6.54
       objectReference: {fileID: 0}
     - target: {fileID: 8113719651079510958, guid: 234ca6ff3453a95409ad82e9a5647947, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 17.19
+      value: -0.6
       objectReference: {fileID: 0}
     - target: {fileID: 8113719651079510958, guid: 234ca6ff3453a95409ad82e9a5647947, type: 3}
       propertyPath: m_LocalPosition.z
