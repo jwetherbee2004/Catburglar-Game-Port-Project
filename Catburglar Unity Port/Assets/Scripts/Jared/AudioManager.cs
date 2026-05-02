@@ -19,7 +19,9 @@ public class AudioManager : MonoBehaviour
     [SerializeField] private AudioClip levelOneMusic;
     [SerializeField] private AudioClip levelTwoMusic;
     [SerializeField] private AudioClip levelThreeMusic;
+    [SerializeField] private AudioClip levelCompleteMusic;
     [SerializeField] private float fadeInDuration = 1f;
+    [SerializeField] private float fadeOutDuration = 1f;
 
     private void Awake()
     {
@@ -186,5 +188,55 @@ public class AudioManager : MonoBehaviour
     public void SetMusicVolume(float volume)
     {
         musicSource.volume = Mathf.Clamp01(volume);
+    }
+
+    public IEnumerator FadeOutMusic(float duration = -1f)
+    {
+        if (duration < 0) duration = fadeOutDuration;
+        float elapsed = 0f;
+        float startVolume = musicSource.volume;
+
+        while (elapsed < duration)
+        {
+            elapsed += Time.deltaTime;
+            musicSource.volume = Mathf.Lerp(startVolume, 0f, elapsed / duration);
+            yield return null;
+        }
+
+        musicSource.volume = 0f;
+        musicSource.Stop();
+    }
+
+    public void PlayLevelCompleteMusic()
+    {
+        if (levelCompleteMusic == null)
+        {
+            Debug.LogWarning("[AudioManager] Level Complete Music not assigned!");
+            return;
+        }
+
+        // Stop any existing fade coroutine
+        if (fadeCoroutine != null)
+        {
+            StopCoroutine(fadeCoroutine);
+        }
+
+        musicSource.clip = levelCompleteMusic;
+        musicSource.volume = 1f;
+        musicSource.time = 0f;
+        musicSource.Play();
+    }
+
+    public void StopAllAudioExceptMusic()
+    {
+        AudioSource[] allAudioSources = FindObjectsOfType<AudioSource>();
+        
+        foreach (AudioSource audioSource in allAudioSources)
+        {
+            if (audioSource != musicSource)
+            {
+                audioSource.Stop();
+            }
+        }
     }
 }
