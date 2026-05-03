@@ -8,6 +8,7 @@ public class PlayerInteraction : MonoBehaviour
     public Transform player;
     private IInteractable currentInteractable;
     private bool uiShown = false;
+    public bool inDialogue = false;
 
     void Awake()
     {
@@ -19,7 +20,15 @@ public class PlayerInteraction : MonoBehaviour
     {
         if (uiShown && Input.GetKeyDown(KeyCode.X) && player.GetComponent<PlayerMovement>().canInteract)
         {
-            currentInteractable.Interact(this);
+            var isDialogue = currentInteractable.Object.GetComponent<DialoguePoint>();
+            if (isDialogue != null)
+            {
+                currentInteractable.Interact(this);
+            }
+            else if (!inDialogue)
+            {
+                currentInteractable.Interact(this);
+            }
             // Forces a UI refresh
             ShowHideUI();
         }
@@ -55,6 +64,29 @@ public class PlayerInteraction : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D other)
     {
+        var otherinteractable = other.GetComponent<DialoguePoint>();
+        if (otherinteractable != null)
+        {
+            if (!otherinteractable.used)
+            {
+                if (currentInteractable != null)
+                {
+                    if (otherinteractable.Object != currentInteractable.Object)
+                    {
+                        currentInteractable = otherinteractable;
+                        GameManager.Instance.DisplayDialogue(otherinteractable.dialogueText);
+                        inDialogue = true;
+                        return;
+                    }
+                } else
+                {
+                    currentInteractable = otherinteractable;
+                    GameManager.Instance.DisplayDialogue(otherinteractable.dialogueText);
+                    inDialogue = true;
+                    return;
+                }
+            }
+        }
         var interactable = other.GetComponent<IInteractable>();
         if (interactable != null)
         {
@@ -66,10 +98,34 @@ public class PlayerInteraction : MonoBehaviour
                 gate.ShowHideBorder();
             }
         }
+        var yetanotherinteractable = other.GetComponent<TipPoint>();
+        if (yetanotherinteractable != null)
+        {
+            if (!yetanotherinteractable.used)
+            {
+                yetanotherinteractable.SetTip();
+            }
+        }
     }
 
     void OnTriggerStay2D(Collider2D other)
     {
+        var otherinteractable = other.GetComponent<DialoguePoint>();
+        if (otherinteractable != null)
+        {
+            if (!otherinteractable.used)
+            {
+                currentInteractable = otherinteractable;
+                interactText.text = currentInteractable.InteractionText;
+                return;
+            }
+        }
+
+        if (inDialogue)
+        {
+            return;
+        }
+
         var interactable = other.GetComponent<IInteractable>();
         if (interactable == null)
         {

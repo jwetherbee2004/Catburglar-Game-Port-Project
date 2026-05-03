@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 7875670813649213723}
   - component: {fileID: -8608154127386868093}
   - component: {fileID: 5695520843373931030}
-  - component: {fileID: 9094740059243073031}
+  - component: {fileID: 4422722110548298764}
   m_Layer: 7
   m_Name: Player
   m_TagString: Player
@@ -248,7 +248,7 @@ MonoBehaviour:
   uiObject: {fileID: 0}
   interactText: {fileID: 0}
   player: {fileID: 0}
---- !u!82 &9094740059243073031
+--- !u!82 &4422722110548298764
 AudioSource:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}

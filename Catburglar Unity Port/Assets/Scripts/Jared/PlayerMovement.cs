@@ -39,6 +39,10 @@ public class PlayerMovement : MonoBehaviour
     private Vector2 ventLaunchVelocity = Vector2.zero;
     private Coroutine ventRoutine;
 
+    private bool isPlayingSpecialAnimation = false;  // Flag for Steal/Search animations
+
+    private bool isInDialoguePoint = false;
+    
     [Header("Roll Hitbox")]
     [SerializeField] private Vector2 rolledHitboxSize = new Vector2(0.8f, 0.8f);
     [SerializeField] private float ceilingCheckDistance = 1;
@@ -83,6 +87,11 @@ public class PlayerMovement : MonoBehaviour
     {
         HandleMovement();
         canInteract = !isCurrentlyRolling && !playerIsCaught && !isCrouching;
+        if (isInDialoguePoint)
+        {
+            isMovementLocked = true;
+            animator.SetBool("isMoving", false);
+        }
     }
 
     void OnTriggerEnter2D(Collider2D collision)
@@ -91,6 +100,9 @@ public class PlayerMovement : MonoBehaviour
         {
             rollDirection *= -1f;
         }
+
+        if (collision.CompareTag("Dialogue"))
+            isInDialoguePoint = true;
     }
 
     void OnCollisionEnter2D(Collision2D collision)
@@ -118,9 +130,28 @@ public class PlayerMovement : MonoBehaviour
         isMovementLocked = false;
     }
 
+
+
+    // public void WaitForMovementLock()
+    // {
+    //     StartCoroutine(WaitToLock());
+    // }
+
+    // private IEnumerator WaitToLock()
+    // {
+    //     yield return null;
+    //     while (animator.IsInTransition(0))
+    //         yield return null;
+
+    //     float clipLength = animator.GetCurrentAnimatorStateInfo(0).length;
+    //     yield return new WaitForSeconds(clipLength);
+    //     LockMovement();
+    // }
+
     public void PlayStealAndUnlock()
     {
         LockMovement();
+        isPlayingSpecialAnimation = true;
         StartCoroutine(StealCoroutine());
     }
 
@@ -136,6 +167,7 @@ public class PlayerMovement : MonoBehaviour
         float clipLength = animator.GetCurrentAnimatorStateInfo(0).length;
         yield return new WaitForSeconds(clipLength);
 
+        isPlayingSpecialAnimation = false;
         UnlockMovement();
     }
 
@@ -168,6 +200,11 @@ public class PlayerMovement : MonoBehaviour
             return true;
         
         return false;
+    }
+
+    public void ToggleIsInDialoguePoint(bool value)
+    {
+        isInDialoguePoint = value;
     }
 
     void HandleMovement()
@@ -375,7 +412,7 @@ public class PlayerMovement : MonoBehaviour
             }
         }
 
-        if (animator != null)
+        if (animator != null && !isPlayingSpecialAnimation)
         {
             animator.SetBool("isMoving", moveInput != 0f && !isCurrentlyRolling);
             animator.SetBool("isCrouching", isCrouching && !isCurrentlyRolling);
