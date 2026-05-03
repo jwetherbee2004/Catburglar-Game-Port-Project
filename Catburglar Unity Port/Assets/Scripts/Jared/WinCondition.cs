@@ -55,7 +55,7 @@ public class WinCondition : MonoBehaviour
     {
         if (winScreenActive && Input.GetKeyDown(KeyCode.X))
         {
-            SceneManager.LoadScene("Level 2");
+            SceneManager.LoadScene("LevelTwo");
         }
     }
 

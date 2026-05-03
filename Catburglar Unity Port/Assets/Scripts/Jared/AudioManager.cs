@@ -74,16 +74,14 @@ public class AudioManager : MonoBehaviour
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
         string sceneName = scene.name;
-        if (sceneName == currentLevel && isMusicPaused)
-        {
-            ResumeMusicAfterReset();
-        }
-        else if (levelMusicTracks.ContainsKey(sceneName))
+        
+        // Reset music state for new scene loads
+        isMusicPaused = false;
+        pausedMusicTime = 0f;
+        
+        if (levelMusicTracks.ContainsKey(sceneName))
         {
             PlayLevelMusic(sceneName);
-        }
-        else
-        {
         }
     }
 
@@ -221,6 +219,7 @@ public class AudioManager : MonoBehaviour
             StopCoroutine(fadeCoroutine);
         }
 
+        currentLevel = null; // Clear so next scene's music isn't skipped
         musicSource.clip = levelCompleteMusic;
         musicSource.volume = 1f;
         musicSource.time = 0f;

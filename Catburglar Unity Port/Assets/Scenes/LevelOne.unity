@@ -430,7 +430,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   levelOneMusic: {fileID: 8300000, guid: 49b2a9a9447d8ae48a027f0c19bd177d, type: 3}
-  levelTwoMusic: {fileID: 0}
+  levelTwoMusic: {fileID: 8300000, guid: a7f387a9efa7df84bbba5160e8d8ead9, type: 3}
   levelThreeMusic: {fileID: 0}
   levelCompleteMusic: {fileID: 8300000, guid: 2bc51f9e1c72e6a4987d19f1480a9ea1, type: 3}
   fadeInDuration: 1
