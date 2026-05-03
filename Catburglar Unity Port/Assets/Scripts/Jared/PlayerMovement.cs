@@ -62,6 +62,7 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private AudioClip[] footsteps;
     [SerializeField] private AudioClip roll;
     [SerializeField] private AudioClip land;
+    [SerializeField] private AudioClip ventHit;
 
     void Start()
     {
@@ -508,6 +509,14 @@ public class PlayerMovement : MonoBehaviour
         if (land != null && audioSource != null)
         {
             audioSource.PlayOneShot(land);
+        }
+    }
+
+    public void PlayVentHit()
+    {
+        if (ventHit != null && audioSource != null)
+        {
+            audioSource.PlayOneShot(ventHit);
         }
     }
 

@@ -28176,6 +28176,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 419441199}
     m_Modifications:
+    - target: {fileID: 3878870121443701824, guid: 234ca6ff3453a95409ad82e9a5647947, type: 3}
+      propertyPath: ventHit
+      value: 
+      objectReference: {fileID: 8300000, guid: cb4501747f54e694d94f872e429002a2, type: 3}
     - target: {fileID: 5695520843373931030, guid: 234ca6ff3453a95409ad82e9a5647947, type: 3}
       propertyPath: uiObject
       value: 
@@ -28194,7 +28198,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8113719651079510958, guid: 234ca6ff3453a95409ad82e9a5647947, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.685
+      value: 15
       objectReference: {fileID: 0}
     - target: {fileID: 8113719651079510958, guid: 234ca6ff3453a95409ad82e9a5647947, type: 3}
       propertyPath: m_LocalPosition.z

@@ -121,6 +121,7 @@ public class CameraController : MonoBehaviour
                 yield return null;
             }
 
+            player.GetComponent<PlayerMovement>().PlayVentHit();
             transform.position = target;
 
             if (holdTime > 0f)
