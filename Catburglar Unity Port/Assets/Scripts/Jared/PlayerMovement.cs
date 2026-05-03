@@ -85,6 +85,7 @@ public class PlayerMovement : MonoBehaviour
         if (isInDialoguePoint)
         {
             isMovementLocked = true;
+            animator.SetBool("isMoving", false);
         }
     }
 
