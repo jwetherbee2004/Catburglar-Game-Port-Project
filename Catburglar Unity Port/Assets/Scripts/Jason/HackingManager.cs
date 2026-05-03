@@ -13,6 +13,11 @@ public class HackingManager : MonoBehaviour
     [SerializeField] private List<Sprite> completionFrames;
     [SerializeField] private Image completionImage;
     [SerializeField] private HackObject sceneHackable;
+    [SerializeField] private AudioClip hackMusic;
+    [SerializeField] private AudioClip hackCorrect;
+    [SerializeField] private AudioClip hackIncorrect;
+    private AudioSource audioSource;
+
     private int[] arrowList = new int[5] { 0, 0, 0, 0, 0 };
     private int index = 0;
     public bool ongoing = false;
@@ -21,6 +26,7 @@ public class HackingManager : MonoBehaviour
     private void Awake()
     {
         instance = this;
+        audioSource = GetComponent<AudioSource>();
     }
 
     public void StartHacking()
@@ -38,6 +44,7 @@ public class HackingManager : MonoBehaviour
     {
         if (!ongoing)
         {
+            audioSource.Stop();
             return;
         }
         int direction = -1;
@@ -57,24 +64,38 @@ public class HackingManager : MonoBehaviour
         {
             direction = 3;
         }
+
+        if (direction == -1)
+        {
+            return;
+        }
+
         if (arrowList[index] == direction)
         {
+            audioSource.PlayOneShot(hackCorrect);
             index++;
-            completionImage.sprite = completionFrames[index];
+
             if (index >= 5)
             {
                 ongoing = false;
                 StartCoroutine(OpenCloseHacking());
                 GameManager.Instance.DisplayObjective("Secondary objective complete.");
-                StopCoroutine(HackTimer());
                 sceneHackable.doneInteracting = true;
                 return;
             }
+
+            completionImage.sprite = completionFrames[index];
+
             foreach (GameObject obj in arrowObjects)
             {
                 obj.SetActive(false);
             }
+
             arrowObjects[arrowList[index]].SetActive(true);
+        }
+        else
+        {
+            audioSource.PlayOneShot(hackIncorrect);
         }
     }
 
@@ -120,11 +141,13 @@ public class HackingManager : MonoBehaviour
         Vector2 endPos;
         if (!ongoing)
         {
-            endPos = new Vector2(startPos.x + 200, startPos.y);
+            endPos = new Vector2(startPos.x + 230, startPos.y);
         }
         else
         {
-            endPos = new Vector2(startPos.x - 200, startPos.y);
+            audioSource.clip = hackMusic;
+            audioSource.Play();
+            endPos = new Vector2(startPos.x - 230, startPos.y);
         }
         while (elapsed < timer)
         {

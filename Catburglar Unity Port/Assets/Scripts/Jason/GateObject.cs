@@ -14,6 +14,7 @@ public class Gate : MonoBehaviour, IInteractable
     private Coroutine activeFade;
     
     private bool playerInDoor = false;
+    private bool isTransitioning = false;
     private Collider2D doorTrigger;
 
     [Header("Audio")]
@@ -72,6 +73,8 @@ public class Gate : MonoBehaviour, IInteractable
 
     public void Interact(PlayerInteraction player)
     {
+        if (isTransitioning) return;
+        isTransitioning = true;
         playerObject = player.gameObject;
         animator.SetTrigger("Open");
         playerObject.GetComponent<PlayerMovement>().LockMovement();
@@ -131,6 +134,7 @@ public class Gate : MonoBehaviour, IInteractable
         c.a = 1f;
         sr.color = c;
         activeFade = null;
+        isTransitioning = false;
         playerObject.GetComponent<PlayerMovement>().UnlockMovement();
     }
 
