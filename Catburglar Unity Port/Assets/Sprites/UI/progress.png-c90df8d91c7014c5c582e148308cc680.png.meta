@@ -1,0 +1,358 @@
+fileFormatVersion: 2
+guid: aa0f310c99729ad41aa36962c4f38966
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -3993083162422435605
+    second: progress.png-c90df8d91c7014c5c582e148308cc680_0
+  - first:
+      213: -8527272595876320792
+    second: progress.png-c90df8d91c7014c5c582e148308cc680_1
+  - first:
+      213: 1648962188157066378
+    second: progress.png-c90df8d91c7014c5c582e148308cc680_2
+  - first:
+      213: 7373691728847594439
+    second: progress.png-c90df8d91c7014c5c582e148308cc680_3
+  - first:
+      213: -8215138432198307714
+    second: progress.png-c90df8d91c7014c5c582e148308cc680_4
+  - first:
+      213: 6970953136690012871
+    second: progress.png-c90df8d91c7014c5c582e148308cc680_5
+  - first:
+      213: -1656419934775386036
+    second: progress.png-c90df8d91c7014c5c582e148308cc680_6
+  - first:
+      213: -6343105376773110099
+    second: progress.png-c90df8d91c7014c5c582e148308cc680_7
+  - first:
+      213: 7389787205706218670
+    second: progress.png-c90df8d91c7014c5c582e148308cc680_8
+  - first:
+      213: -4169948259584227904
+    second: progress.png-c90df8d91c7014c5c582e148308cc680_9
+  - first:
+      213: 1161166635264410604
+    second: progress.png-c90df8d91c7014c5c582e148308cc680_10
+  - first:
+      213: 2941654659887534627
+    second: progress.png-c90df8d91c7014c5c582e148308cc680_11
+  - first:
+      213: 6161429742554389452
+    second: progress.png-c90df8d91c7014c5c582e148308cc680_12
+  - first:
+      213: 8086461512603149535
+    second: progress.png-c90df8d91c7014c5c582e148308cc680_13
+  - first:
+      213: -7844738830252881160
+    second: progress.png-c90df8d91c7014c5c582e148308cc680_14
+  - first:
+      213: -7370535538294859563
+    second: progress.png-c90df8d91c7014c5c582e148308cc680_15
+  - first:
+      213: 2361451541481688533
+    second: progress.png-c90df8d91c7014c5c582e148308cc680_16
+  - first:
+      213: -3266517983266191860
+    second: progress.png-c90df8d91c7014c5c582e148308cc680_17
+  - first:
+      213: -2315487962603786250
+    second: progress.png-c90df8d91c7014c5c582e148308cc680_18
+  - first:
+      213: -8873626673210674578
+    second: progress.png-c90df8d91c7014c5c582e148308cc680_19
+  - first:
+      213: -611144988243079719
+    second: progress.png-c90df8d91c7014c5c582e148308cc680_20
+  - first:
+      213: -5134679608518383562
+    second: progress.png-c90df8d91c7014c5c582e148308cc680_21
+  - first:
+      213: -9102708678396269699
+    second: progress.png-c90df8d91c7014c5c582e148308cc680_22
+  - first:
+      213: 2203124250170391049
+    second: progress.png-c90df8d91c7014c5c582e148308cc680_23
+  - first:
+      213: 7989979572611362626
+    second: progress.png-c90df8d91c7014c5c582e148308cc680_24
+  - first:
+      213: 1593443904296653829
+    second: progress.png-c90df8d91c7014c5c582e148308cc680_25
+  - first:
+      213: -4948093344113304716
+    second: progress.png-c90df8d91c7014c5c582e148308cc680_26
+  - first:
+      213: -3049485150052771965
+    second: progress.png-c90df8d91c7014c5c582e148308cc680_27
+  - first:
+      213: 6499472445881613622
+    second: progress.png-c90df8d91c7014c5c582e148308cc680_28
+  - first:
+      213: 6667558254454960620
+    second: progress.png-c90df8d91c7014c5c582e148308cc680_29
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 0
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: progress.png-c90df8d91c7014c5c582e148308cc680_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 40
+        width: 40
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: be0a7312508b598c0800000000000000
+      internalID: -3993083162422435605
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: progress.png-c90df8d91c7014c5c582e148308cc680_1
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 32
+        width: 40
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8e96ed3e0ca09a980800000000000000
+      internalID: -8527272595876320792
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: progress.png-c90df8d91c7014c5c582e148308cc680_2
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 24
+        width: 40
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a8c1721af5a42e610800000000000000
+      internalID: 1648962188157066378
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: progress.png-c90df8d91c7014c5c582e148308cc680_3
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 16
+        width: 40
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7c362355f8d945660800000000000000
+      internalID: 7373691728847594439
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: progress.png-c90df8d91c7014c5c582e148308cc680_4
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 8
+        width: 40
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e7019202f17fdfd80800000000000000
+      internalID: -8215138432198307714
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: progress.png-c90df8d91c7014c5c582e148308cc680_5
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 40
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7c2ad42b1fccdb060800000000000000
+      internalID: 6970953136690012871
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 59b9d68e23ad4e34894393cfd01ab79b
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      progress.png-c90df8d91c7014c5c582e148308cc680_0: -3993083162422435605
+      progress.png-c90df8d91c7014c5c582e148308cc680_1: -8527272595876320792
+      progress.png-c90df8d91c7014c5c582e148308cc680_2: 1648962188157066378
+      progress.png-c90df8d91c7014c5c582e148308cc680_3: 7373691728847594439
+      progress.png-c90df8d91c7014c5c582e148308cc680_4: -8215138432198307714
+      progress.png-c90df8d91c7014c5c582e148308cc680_5: 6970953136690012871
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

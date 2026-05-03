@@ -9,6 +9,6 @@ public class HackObject : MonoBehaviour, IInteractable
     public void Interact(PlayerInteraction player)
     {
         doneInteracting = true;
-        Debug.Log("Hacked");
+        HackingManager.instance.StartHacking();
     }
 }

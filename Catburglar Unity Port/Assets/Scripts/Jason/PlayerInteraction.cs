@@ -59,6 +59,7 @@ public class PlayerInteraction : MonoBehaviour
         if (!CheckIfInteractable())
         {
             uiObject.SetActive(false);
+            uiShown = !uiShown;
         }
     }
 
@@ -133,9 +134,9 @@ public class PlayerInteraction : MonoBehaviour
         }
 
         currentInteractable = interactable;
-        
+
         bool canInteract = player.GetComponent<PlayerMovement>().canInteract;
-        
+
         // Hide UI if player can't interact
         if (!canInteract && uiShown)
         {
@@ -151,6 +152,10 @@ public class PlayerInteraction : MonoBehaviour
             {
                 interactText.text = currentInteractable.InteractionText;
             }
+        }
+        if (interactText.text != currentInteractable.InteractionText)
+        {
+            interactText.text = currentInteractable.InteractionText;
         }
     }
 
