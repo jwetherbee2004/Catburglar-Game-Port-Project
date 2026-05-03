@@ -6,6 +6,12 @@ public class SearchObject : MonoBehaviour, IInteractable
     [SerializeField] int value = 0;
     public bool doneInteracting = false;
     public GameObject Object => gameObject;
+    public PlayerMovement playerChar;
+
+    void Awake()
+    {
+        playerChar = GameObject.FindGameObjectWithTag("Player")?.GetComponent<PlayerMovement>();
+    }
 
     public void Interact(PlayerInteraction player)
     {

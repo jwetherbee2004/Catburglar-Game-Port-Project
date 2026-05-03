@@ -34,6 +34,14 @@ public class PlayerMovement : MonoBehaviour
     private bool wasUnderPlatform = false;
     private float platformExitDelay = 0.3f;
     private float platformExitTimer = 0f;
+
+    private bool isVentControlled = false;
+    private Vector2 ventLaunchVelocity = Vector2.zero;
+    private Coroutine ventRoutine;
+
+    private bool isPlayingSpecialAnimation = false;  // Flag for Steal/Search animations
+
+    private bool isInDialoguePoint = false;
     
     [Header("Roll Hitbox")]
     [SerializeField] private Vector2 rolledHitboxSize = new Vector2(0.8f, 0.8f);
@@ -79,6 +87,11 @@ public class PlayerMovement : MonoBehaviour
     {
         HandleMovement();
         canInteract = !isCurrentlyRolling && !playerIsCaught && !isCrouching;
+        if (isInDialoguePoint)
+        {
+            isMovementLocked = true;
+            animator.SetBool("isMoving", false);
+        }
     }
 
     void OnTriggerEnter2D(Collider2D collision)
@@ -87,6 +100,9 @@ public class PlayerMovement : MonoBehaviour
         {
             rollDirection *= -1f;
         }
+
+        if (collision.CompareTag("Dialogue"))
+            isInDialoguePoint = true;
     }
 
     void OnCollisionEnter2D(Collision2D collision)
@@ -114,25 +130,28 @@ public class PlayerMovement : MonoBehaviour
         isMovementLocked = false;
     }
 
-    public void WaitForMovementLock()
-    {
-        StartCoroutine(WaitToLock());
-    }
 
-    private IEnumerator WaitToLock()
-    {
-        yield return null;
-        while (animator.IsInTransition(0))
-            yield return null;
 
-        float clipLength = animator.GetCurrentAnimatorStateInfo(0).length;
-        yield return new WaitForSeconds(clipLength);
-        LockMovement();
-    }
+    // public void WaitForMovementLock()
+    // {
+    //     StartCoroutine(WaitToLock());
+    // }
+
+    // private IEnumerator WaitToLock()
+    // {
+    //     yield return null;
+    //     while (animator.IsInTransition(0))
+    //         yield return null;
+
+    //     float clipLength = animator.GetCurrentAnimatorStateInfo(0).length;
+    //     yield return new WaitForSeconds(clipLength);
+    //     LockMovement();
+    // }
 
     public void PlayStealAndUnlock()
     {
         LockMovement();
+        isPlayingSpecialAnimation = true;
         StartCoroutine(StealCoroutine());
     }
 
@@ -148,6 +167,7 @@ public class PlayerMovement : MonoBehaviour
         float clipLength = animator.GetCurrentAnimatorStateInfo(0).length;
         yield return new WaitForSeconds(clipLength);
 
+        isPlayingSpecialAnimation = false;
         UnlockMovement();
     }
 
@@ -180,6 +200,11 @@ public class PlayerMovement : MonoBehaviour
             return true;
         
         return false;
+    }
+
+    public void ToggleIsInDialoguePoint(bool value)
+    {
+        isInDialoguePoint = value;
     }
 
     void HandleMovement()
@@ -387,7 +412,7 @@ public class PlayerMovement : MonoBehaviour
             }
         }
 
-        if (animator != null)
+        if (animator != null && !isPlayingSpecialAnimation)
         {
             animator.SetBool("isMoving", moveInput != 0f && !isCurrentlyRolling);
             animator.SetBool("isCrouching", isCrouching && !isCurrentlyRolling);
@@ -402,6 +427,63 @@ public class PlayerMovement : MonoBehaviour
             }
         }
     }
+
+    public void TeleportTo(Vector2 worldPosition)
+    {
+        if (rb == null)
+            rb = GetComponent<Rigidbody2D>();
+
+        rb.position = worldPosition;
+        rb.linearVelocity = Vector2.zero;
+        transform.position = worldPosition;
+    }
+
+    public void BeginVentLaunch(Vector2 launchVelocity, float rollLaunchDuration)
+    {
+        if (ventRoutine != null)
+            StopCoroutine(ventRoutine);
+
+        ventRoutine = StartCoroutine(VentLaunchRoutine(launchVelocity, rollLaunchDuration));
+    }
+
+    private IEnumerator VentLaunchRoutine(Vector2 launchVelocity, float rollLaunchDuration)
+    {
+        isVentControlled = true;
+        isMovementLocked = false;
+        rollCanceled = false;
+        rollTimer = Mathf.Max(rollLaunchDuration, 0.01f);
+        isCurrentlyRolling = true;
+        ventLaunchVelocity = launchVelocity;
+
+        if (spriteRenderer != null)
+        {
+            if (launchVelocity.x > 0f)
+                spriteRenderer.flipX = false;
+            else if (launchVelocity.x < 0f)
+                spriteRenderer.flipX = true;
+        }
+
+        if (animator != null)
+        {
+            animator.SetBool("isMoving", false);
+            animator.SetBool("isCrouching", false);
+            animator.SetBool("isRolling", true);
+            animator.SetBool("isFalling", false);
+        }
+
+        rb.linearVelocity = launchVelocity;
+
+        yield return new WaitForSeconds(rollLaunchDuration);
+
+        isVentControlled = false;
+        isCurrentlyRolling = false;
+        rollTimer = 0f;
+        ventRoutine = null;
+
+        if (animator != null)
+            animator.SetBool("isRolling", false);
+    }
+
 
     // Audio methods called from animation events
     public void PlayFootstep()

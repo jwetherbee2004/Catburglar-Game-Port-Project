@@ -25,7 +25,6 @@ public class TimeTracker : MonoBehaviour
 
         isTracking = false;
         formattedTime = FormatTime(elapsedTime);
-        Debug.Log($"WIN! Time: {formattedTime}");
     }
 
     private string FormatTime(float seconds)

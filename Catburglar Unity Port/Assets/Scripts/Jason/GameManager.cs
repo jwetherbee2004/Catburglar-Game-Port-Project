@@ -6,7 +6,6 @@ using UnityEngine.Rendering.Universal;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using static Unity.Burst.Intrinsics.X86.Avx;
-using TMPro;
 
 public class GameManager : MonoBehaviour
 {
@@ -17,8 +16,12 @@ public class GameManager : MonoBehaviour
     [SerializeField] private GameObject dialogueObject;
     [SerializeField] private TextMeshProUGUI dialogueText;
     [SerializeField] private PlayerMovement player;
-    private Vector3 moneyTextStart = new Vector3(25, 560, 0);
-    private Vector3 moneyTextEnd = new Vector3 (25, 536, 0);
+    [SerializeField] private float lootAnimationDuration = 1f;
+    [SerializeField] private Vector2 lootDisplayOffset = new Vector2(70, -5);
+    [SerializeField] private float lootDisplayDistance = 24f;
+    [SerializeField] private Vector2 lootVisiblePosition = new Vector2(10, 50);
+    [SerializeField] private float lootDisplayHoldTime = 1f;
+    
     private int loot = 0;
     private int level = 0;
     private int[] lootRequirements = { 300, 0, 0 };
@@ -88,24 +91,29 @@ public class GameManager : MonoBehaviour
 
     private IEnumerator MoneyTextAnimation()
     {
-        float duration = 1f;
-        float elapsed = 0f;
+        RectTransform lootRect = lootText.rectTransform;
+        RectTransform moneyRect = moneyText.rectTransform;
+
         lootText.gameObject.SetActive(true);
         moneyText.gameObject.SetActive(true);
-        lootText.transform.position = moneyTextStart;
-        moneyText.transform.position = new Vector3(lootText.transform.position.x + 70, lootText.transform.position.y, 0);
 
-        while (elapsed < duration)
+        Vector2 lootStartPos = lootVisiblePosition + Vector2.up * lootDisplayDistance;
+
+        float elapsed = 0f;
+        while (elapsed < lootAnimationDuration)
         {
             elapsed += Time.deltaTime;
-            float t = elapsed / duration;
+            float t = Mathf.Clamp01(elapsed / lootAnimationDuration);
 
-            lootText.transform.position = Vector3.Lerp(moneyTextStart, moneyTextEnd, t);
-            moneyText.transform.position = new Vector3(lootText.transform.position.x+60, lootText.transform.position.y, 0);
+            lootRect.anchoredPosition = Vector2.Lerp(lootStartPos, lootVisiblePosition, t);
+            moneyRect.anchoredPosition = lootRect.anchoredPosition + lootDisplayOffset;
 
             yield return null;
         }
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(lootDisplayHoldTime);
+
+        lootRect.anchoredPosition = lootStartPos;
+        moneyRect.anchoredPosition = lootStartPos + lootDisplayOffset;
         lootText.gameObject.SetActive(false);
         moneyText.gameObject.SetActive(false);
     }
@@ -249,7 +257,7 @@ public class GameManager : MonoBehaviour
     {
         dialogueObject.SetActive(true);
         dialogueText.text = dialogue;
-        player.WaitForMovementLock();
+        // player.WaitForMovementLock();
     }
     
     private void PlayLevelReset()

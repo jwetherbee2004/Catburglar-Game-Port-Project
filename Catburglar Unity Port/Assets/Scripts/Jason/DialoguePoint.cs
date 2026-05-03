@@ -21,5 +21,6 @@ public class DialoguePoint : MonoBehaviour, IInteractable
         used = true;
         dialogueBox.SetActive(false);
         GetComponent<BoxCollider2D>().enabled = false;
+        player.gameObject.GetComponent<PlayerMovement>().ToggleIsInDialoguePoint(false);
     }
 }

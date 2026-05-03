@@ -1,4 +1,5 @@
 using UnityEngine;
+using System.Collections;
 
 public class CameraController : MonoBehaviour
 {
@@ -24,6 +25,7 @@ public class CameraController : MonoBehaviour
     private Vector3 normalOffset;
     private Vector3 targetOffset;
     private bool isPanning = false;
+    private bool isScriptedPanActive = false;
 
     private void Start()
     {
@@ -38,7 +40,7 @@ public class CameraController : MonoBehaviour
 
     void LateUpdate()
     {
-        if (player == null)
+        if (player == null || isScriptedPanActive)
             return;
 
         // Smoothly interpolate offset for door panning
@@ -84,6 +86,48 @@ public class CameraController : MonoBehaviour
     {
         targetOffset = normalOffset;
         isPanning = true;
+    }
+
+    public void SnapToPlayer()
+    {
+        if (player == null)
+            return;
+
+        transform.position = player.position + offset;
+    }
+
+    public IEnumerator PanBetweenWaypoints(Transform[] waypoints, float moveSpeed, float holdTime = 0.1f)
+    {
+        if (waypoints == null || waypoints.Length == 0)
+        {
+            Debug.LogWarning("PanBetweenWaypoints called with null or empty waypoints array.");
+            yield break;
+        }
+
+        isScriptedPanActive = true;
+
+        for (int i = 0; i < waypoints.Length; i++)
+        {
+            Transform waypoint = waypoints[i];
+            if (waypoint == null)
+                continue;
+
+            Vector3 target = waypoint.position;
+            target.z = transform.position.z;
+
+            while (Vector3.Distance(transform.position, target) > 0.02f)
+            {
+                transform.position = Vector3.MoveTowards(transform.position, target, moveSpeed * Time.deltaTime);
+                yield return null;
+            }
+
+            transform.position = target;
+
+            if (holdTime > 0f)
+                yield return new WaitForSeconds(holdTime);
+        }
+
+        isScriptedPanActive = false;
     }
 
     private void OnDrawGizmos()
