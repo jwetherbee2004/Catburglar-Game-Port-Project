@@ -16,7 +16,6 @@ public class SearchObject : MonoBehaviour, IInteractable
     public void Interact(PlayerInteraction player)
     {
         GameManager.Instance.AddMoney(value);
-        playerChar.PlaySearch();
         doneInteracting = true;
     }
 }
