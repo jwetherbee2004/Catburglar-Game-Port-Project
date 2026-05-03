@@ -90,7 +90,7 @@ public class EnemyPatrol : MonoBehaviour
             return;
         }
 
-        if (isWaiting || isSpotting || isSleeping)
+        if (isWaiting || isSpotting || isSleeping || speed == 0)
         {
             animator.SetBool("isWalking", false);
             return;

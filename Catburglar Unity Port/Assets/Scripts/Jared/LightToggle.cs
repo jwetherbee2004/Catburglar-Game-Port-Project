@@ -24,6 +24,7 @@ public class LightToggle : MonoBehaviour, IInteractable
     {
         isOn = !isOn;
         GetComponentInChildren<Light2D>().enabled = isOn;
+        GetComponentInChildren<PolygonCollider2D>().enabled = isOn;
         audioSource.PlayOneShot(lightSwitch);
     }
 }
