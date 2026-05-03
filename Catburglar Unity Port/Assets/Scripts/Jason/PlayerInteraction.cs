@@ -55,18 +55,6 @@ public class PlayerInteraction : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D other)
     {
-        var interactable = other.GetComponent<IInteractable>();
-        if (interactable != null)
-        {
-            currentInteractable = interactable;
-            ShowHideUI();
-            var gate = other.GetComponentInChildren<Gate>();
-            if (gate != null)
-            {
-                gate.ShowHideBorder();
-            }
-            return;
-        }
         var otherinteractable = other.GetComponent<DialoguePoint>();
         if (otherinteractable != null)
         {
@@ -77,6 +65,17 @@ public class PlayerInteraction : MonoBehaviour
             }
             return;
         }
+        var interactable = other.GetComponent<IInteractable>();
+        if (interactable != null)
+        {
+            currentInteractable = interactable;
+            ShowHideUI();
+            var gate = other.GetComponentInChildren<Gate>();
+            if (gate != null)
+            {
+                gate.ShowHideBorder();
+            }
+        }
         var yetanotherinteractable = other.GetComponent<TipPoint>();
         if (yetanotherinteractable != null)
         {
@@ -84,12 +83,19 @@ public class PlayerInteraction : MonoBehaviour
             {
                 yetanotherinteractable.SetTip();
             }
-            return;
         }
     }
 
     void OnTriggerStay2D(Collider2D other)
     {
+        var otherinteractable = other.GetComponent<DialoguePoint>();
+        if (otherinteractable != null)
+        {
+            currentInteractable = otherinteractable;
+            interactText.text = currentInteractable.InteractionText;
+            return;
+        }
+
         var interactable = other.GetComponent<IInteractable>();
         if (interactable == null)
         {

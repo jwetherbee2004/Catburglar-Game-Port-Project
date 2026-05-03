@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 6296907578460188699}
   - component: {fileID: 3316614543179811258}
   - component: {fileID: 1759971727767622280}
-  - component: {fileID: 2960030383731245618}
+  - component: {fileID: 6448480838251495033}
   m_Layer: 0
   m_Name: TipPoint
   m_TagString: Untagged
@@ -121,9 +121,9 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingLayerID: -451567661
+  m_SortingLayer: 3
+  m_SortingOrder: 5
   m_Sprite: {fileID: 10907, guid: 0000000000000000f000000000000000, type: 0}
   m_Color: {r: 0.12382397, g: 0.6392157, b: 0.047058806, a: 1}
   m_FlipX: 0
@@ -135,7 +135,7 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &2960030383731245618
+--- !u!114 &6448480838251495033
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -144,10 +144,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 2927448680420079640}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d488f26154dc86b48a7818d577cfd724, type: 3}
+  m_Script: {fileID: 11500000, guid: f0c6a6b1392ec3b4f98c93c5c7882930, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   used: 0
-  dialogueText: Good to see Cronjager's still finding work, but those eyes of his
-    aren't doing him any favors. As long as I'm in the dark, I'm invisible.
-  dialogueBox: {fileID: 0}
+  tipText: 
+  tipBox: {fileID: 0}
