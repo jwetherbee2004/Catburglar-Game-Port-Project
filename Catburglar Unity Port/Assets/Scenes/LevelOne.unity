@@ -2113,12 +2113,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 190994114}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: -7.7, y: -0.82, z: 0}
   m_LocalScale: {x: 0.8316, y: 2.2493, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 0}
+  m_Father: {fileID: 300224012}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &200386847 stripped
 Transform:
@@ -2488,7 +2488,7 @@ GameObject:
   m_Component:
   - component: {fileID: 300224012}
   m_Layer: 0
-  m_Name: PlayerObjects
+  m_Name: MiscGameManagementObjects
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2513,7 +2513,9 @@ Transform:
   - {fileID: 877692523}
   - {fileID: 39493250}
   - {fileID: 519420032}
+  - {fileID: 190994118}
   - {fileID: 1249748912}
+  - {fileID: 2140638859}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &300933445 stripped
@@ -5667,9 +5669,9 @@ MonoBehaviour:
   orthographicSize: 6.5
   useBoundaries: 1
   minX: -13
-  maxX: 42.5
-  minY: -4.33
-  maxY: 22.7
+  maxX: 40
+  minY: -4
+  maxY: 24
   doorPanSpeed: 7.5
   doorPanMinDistance: 5
 --- !u!1 &529922360
@@ -6569,7 +6571,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 25, y: -20.00003}
+  m_AnchoredPosition: {x: 25, y: -20}
   m_SizeDelta: {x: 52.586, y: 25.7434}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &603906322
@@ -29309,12 +29311,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2140638856}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 0}
+  m_Father: {fileID: 300224012}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &2143091625 stripped
 MonoBehaviour:
@@ -30052,8 +30054,6 @@ SceneRoots:
   - {fileID: 1642995145}
   - {fileID: 616951363}
   - {fileID: 601728770}
-  - {fileID: 2140638859}
-  - {fileID: 190994118}
   - {fileID: 1362767498}
   - {fileID: 1046617487}
   - {fileID: 871919268}
