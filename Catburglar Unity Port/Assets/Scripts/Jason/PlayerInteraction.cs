@@ -8,6 +8,7 @@ public class PlayerInteraction : MonoBehaviour
     public Transform player;
     private IInteractable currentInteractable;
     private bool uiShown = false;
+    public bool inDialogue = false;
 
     void Awake()
     {
@@ -19,7 +20,15 @@ public class PlayerInteraction : MonoBehaviour
     {
         if (uiShown && Input.GetKeyDown(KeyCode.X) && player.GetComponent<PlayerMovement>().canInteract)
         {
-            currentInteractable.Interact(this);
+            var isDialogue = currentInteractable.Object.GetComponent<DialoguePoint>();
+            if (isDialogue != null)
+            {
+                currentInteractable.Interact(this);
+            }
+            else if (!inDialogue)
+            {
+                currentInteractable.Interact(this);
+            }
             // Forces a UI refresh
             ShowHideUI();
         }
@@ -60,10 +69,23 @@ public class PlayerInteraction : MonoBehaviour
         {
             if (!otherinteractable.used)
             {
-                GameManager.Instance.DisplayDialogue(otherinteractable.dialogueText);
-                otherinteractable.used = true;
+                if (currentInteractable != null)
+                {
+                    if (otherinteractable.Object != currentInteractable.Object)
+                    {
+                        currentInteractable = otherinteractable;
+                        GameManager.Instance.DisplayDialogue(otherinteractable.dialogueText);
+                        inDialogue = true;
+                        return;
+                    }
+                } else
+                {
+                    currentInteractable = otherinteractable;
+                    GameManager.Instance.DisplayDialogue(otherinteractable.dialogueText);
+                    inDialogue = true;
+                    return;
+                }
             }
-            return;
         }
         var interactable = other.GetComponent<IInteractable>();
         if (interactable != null)
@@ -91,8 +113,16 @@ public class PlayerInteraction : MonoBehaviour
         var otherinteractable = other.GetComponent<DialoguePoint>();
         if (otherinteractable != null)
         {
-            currentInteractable = otherinteractable;
-            interactText.text = currentInteractable.InteractionText;
+            if (!otherinteractable.used)
+            {
+                currentInteractable = otherinteractable;
+                interactText.text = currentInteractable.InteractionText;
+                return;
+            }
+        }
+
+        if (inDialogue)
+        {
             return;
         }
 

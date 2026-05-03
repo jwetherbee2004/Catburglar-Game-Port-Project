@@ -248,8 +248,8 @@ public class GameManager : MonoBehaviour
     public void DisplayDialogue(string dialogue)
     {
         dialogueObject.SetActive(true);
-        player.LockMovement();
         dialogueText.text = dialogue;
+        player.WaitForMovementLock();
     }
     
     private void PlayLevelReset()
