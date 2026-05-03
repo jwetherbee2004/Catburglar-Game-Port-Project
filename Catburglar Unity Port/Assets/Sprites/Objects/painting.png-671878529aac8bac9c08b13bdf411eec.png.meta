@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: bf065c9673ea6b24fb92311055017d19
+guid: 6c7991c620336de438b0474fc2659ee0
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 7401132127503912966
-    second: vase.png-3cc09f34bdc2d6f535d824f726b656dc_0
+      213: 1150966398884736670
+    second: painting.png-671878529aac8bac9c08b13bdf411eec_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -100,12 +100,12 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: vase.png-3cc09f34bdc2d6f535d824f726b656dc_0
+      name: painting.png-671878529aac8bac9c08b13bdf411eec_0
       rect:
         serializedVersion: 2
-        x: 1
+        x: 0
         y: 0
-        width: 15
+        width: 12
         height: 16
       alignment: 0
       pivot: {x: 0, y: 0}
@@ -115,8 +115,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 6001a93057a16b660800000000000000
-      internalID: 7401132127503912966
+      spriteID: e9e6fe977dd09ff00800000000000000
+      internalID: 1150966398884736670
       vertices: []
       indices: 
       edges: []
@@ -135,7 +135,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      vase.png-3cc09f34bdc2d6f535d824f726b656dc_0: 7401132127503912966
+      painting.png-671878529aac8bac9c08b13bdf411eec_0: 1150966398884736670
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
