@@ -119,8 +119,13 @@ public class EnemyPatrol : MonoBehaviour
         if (player == null || isSleeping)
             return false;
 
-        Vector3 directionToPlayer = (player.position - enemy.position).normalized;
-        float distanceToPlayer = Vector3.Distance(enemy.position, player.position);
+        // Use the collider's world-space center so detection stays accurate when
+        // the hitbox shrinks and shifts during a roll
+        Collider2D playerCol = player.GetComponent<Collider2D>();
+        Vector3 targetPos = (playerCol != null) ? playerCol.bounds.center : player.position;
+
+        Vector3 directionToPlayer = (targetPos - enemy.position).normalized;
+        float distanceToPlayer = Vector3.Distance(enemy.position, targetPos);
 
         if (distanceToPlayer > raycastDistance)
         {
@@ -128,22 +133,22 @@ public class EnemyPatrol : MonoBehaviour
             return false;
         }
 
-        float horizontalDistance = Mathf.Abs(player.position.x - enemy.position.x);
+        float horizontalDistance = Mathf.Abs(targetPos.x - enemy.position.x);
         if (horizontalDistance > horizontalDetectionRange)
         {
             lastDetectionResult = false;
             return false;
         }
 
-        float verticalDistance = Mathf.Abs(player.position.y - enemy.position.y);
+        float verticalDistance = Mathf.Abs(targetPos.y - enemy.position.y);
         if (verticalDistance > verticalDetectionRange)
         {
             lastDetectionResult = false;
             return false;
         }
 
-        bool playerInFront = (currentDirection > 0 && player.position.x > enemy.position.x) ||
-                            (currentDirection < 0 && player.position.x < enemy.position.x);
+        bool playerInFront = (currentDirection > 0 && targetPos.x > enemy.position.x) ||
+                            (currentDirection < 0 && targetPos.x < enemy.position.x);
         
         if (!playerInFront)
         {
@@ -165,7 +170,7 @@ public class EnemyPatrol : MonoBehaviour
             }
         }
 
-        RaycastHit2D hit = Physics2D.Raycast(enemy.position, directionToPlayer, distanceToPlayer, playerLayer);
+        RaycastHit2D hit = Physics2D.CircleCast(enemy.position, 0.5f, directionToPlayer, distanceToPlayer, playerLayer);
         if (!hit.collider)
         {
             lastDetectionResult = false;
@@ -180,7 +185,7 @@ public class EnemyPatrol : MonoBehaviour
             return false;
         }
 
-        Collider2D playerInLight = Physics2D.OverlapPoint(player.position, lightLayer);
+        Collider2D playerInLight = Physics2D.OverlapPoint(targetPos, lightLayer);
         
         lastDetectionResult = playerInLight != null;
         return lastDetectionResult;
