@@ -232,6 +232,12 @@ public class GameManager : MonoBehaviour
         StartCoroutine(ObjectiveAnimation());
     }
 
+    public void DisplayObjective(string text)
+    {
+        goalText.text = text;
+        StartCoroutine(ObjectiveAnimation());
+    }
+
     private IEnumerator ObjectiveAnimation()
     {
         yield return new WaitForSeconds(7f);

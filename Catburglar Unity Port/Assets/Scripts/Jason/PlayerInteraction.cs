@@ -91,7 +91,10 @@ public class PlayerInteraction : MonoBehaviour
         var interactable = other.GetComponent<IInteractable>();
         if (interactable != null)
         {
-            currentInteractable = interactable;
+            if (CheckIfInteractable(interactable))
+            {
+                currentInteractable = interactable;
+            }
             ShowHideUI();
             var gate = other.GetComponentInChildren<Gate>();
             if (gate != null)
@@ -133,7 +136,10 @@ public class PlayerInteraction : MonoBehaviour
             return;
         }
 
-        currentInteractable = interactable;
+        if (CheckIfInteractable(interactable))
+        {
+            currentInteractable = interactable;
+        }
 
         bool canInteract = player.GetComponent<PlayerMovement>().canInteract;
 
@@ -153,9 +159,12 @@ public class PlayerInteraction : MonoBehaviour
                 interactText.text = currentInteractable.InteractionText;
             }
         }
-        if (interactText.text != currentInteractable.InteractionText)
+        if (currentInteractable != null)
         {
-            interactText.text = currentInteractable.InteractionText;
+            if (interactText.text != currentInteractable.InteractionText)
+            {
+                interactText.text = currentInteractable.InteractionText;
+            }
         }
     }
 
@@ -179,6 +188,31 @@ public class PlayerInteraction : MonoBehaviour
         var hackObj = currentInteractable.Object.GetComponent<HackObject>();
         if (hackObj != null)
         {
+            if (HackingManager.instance.ongoing == true)
+            {
+                return false;
+            }
+            return !hackObj.doneInteracting;
+        }
+
+        return true;
+    }
+
+    bool CheckIfInteractable(IInteractable testInteract)
+    {
+        var searchObj = testInteract.Object.GetComponent<SearchObject>();
+        if (searchObj != null)
+        {
+            return !searchObj.doneInteracting;
+        }
+
+        var hackObj = testInteract.Object.GetComponent<HackObject>();
+        if (hackObj != null)
+        {
+            if (HackingManager.instance.ongoing == true)
+            {
+                return false;
+            }
             return !hackObj.doneInteracting;
         }
 

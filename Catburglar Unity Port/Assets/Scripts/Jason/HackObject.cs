@@ -8,7 +8,6 @@ public class HackObject : MonoBehaviour, IInteractable
 
     public void Interact(PlayerInteraction player)
     {
-        doneInteracting = true;
         HackingManager.instance.StartHacking();
     }
 }

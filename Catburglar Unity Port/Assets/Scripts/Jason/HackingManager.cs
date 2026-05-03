@@ -1,6 +1,7 @@
 using UnityEngine;
 using System.Collections.Generic;
 using UnityEngine.UI;
+using System.Collections;
 using Unity.VisualScripting;
 
 public class HackingManager : MonoBehaviour
@@ -9,9 +10,12 @@ public class HackingManager : MonoBehaviour
     [SerializeField] private List<GameObject> arrowObjects;
     [SerializeField] private PlayerMovement player;
     [SerializeField] private GameObject hackingUI;
+    [SerializeField] private List<Sprite> completionFrames;
+    [SerializeField] private Image completionImage;
+    [SerializeField] private HackObject sceneHackable;
     private int[] arrowList = new int[5] { 0, 0, 0, 0, 0 };
     private int index = 0;
-    private bool ongoing = false;
+    public bool ongoing = false;
     static public HackingManager instance;
 
     private void Awake()
@@ -22,10 +26,11 @@ public class HackingManager : MonoBehaviour
     public void StartHacking()
     {
         player.LockMovement();
-        index = 0;
-        hackingUI.SetActive(true);
         PopulateList();
         ongoing = true;
+        index = 0;
+        hackingUI.SetActive(true);
+        StartCoroutine(OpenCloseHacking());
     }
 
     // Update is called once per frame
@@ -55,9 +60,14 @@ public class HackingManager : MonoBehaviour
         if (arrowList[index] == direction)
         {
             index++;
-            if (index >= 4)
+            completionImage.sprite = completionFrames[index];
+            if (index >= 5)
             {
-                EndHacking();
+                ongoing = false;
+                StartCoroutine(OpenCloseHacking());
+                GameManager.Instance.DisplayObjective("Secondary objective complete.");
+                StopCoroutine(HackTimer());
+                sceneHackable.doneInteracting = true;
                 return;
             }
             foreach (GameObject obj in arrowObjects)
@@ -79,12 +89,57 @@ public class HackingManager : MonoBehaviour
             obj.SetActive(false);
         }
         arrowObjects[arrowList[index]].SetActive(true);
+        completionImage.sprite = completionFrames[index];
     }
 
-    private void EndHacking()
+    private IEnumerator HackTimer()
     {
-        ongoing = false;
-        player.UnlockMovement();
-        hackingUI.SetActive(false);
+        float timer = 7f;
+        float elapsed = 0f;
+        while (elapsed < timer && ongoing)
+        {
+            elapsed += Time.deltaTime;
+            foreach (Slider sl in timerSliders)
+            {
+                sl.value = 1-(elapsed / timer);
+            }
+            yield return null;
+        }
+        if (ongoing)
+        {
+            ongoing = false;
+            StartCoroutine(OpenCloseHacking());
+        }
     }
+
+    private IEnumerator OpenCloseHacking()
+    {
+        float timer = 1f;
+        float elapsed = 0f;
+        Vector2 startPos = hackingUI.transform.position;
+        Vector2 endPos;
+        if (!ongoing)
+        {
+            endPos = new Vector2(startPos.x + 200, startPos.y);
+        }
+        else
+        {
+            endPos = new Vector2(startPos.x - 200, startPos.y);
+        }
+        while (elapsed < timer)
+        {
+            elapsed += Time.deltaTime;
+            hackingUI.transform.position = Vector2.Lerp(startPos, endPos, elapsed/timer);
+            yield return null;
+        }
+        if (ongoing)
+        {
+            StartCoroutine(HackTimer());
+        } else
+        {
+            player.UnlockMovement();
+            hackingUI.SetActive(false);
+        }
+    }
+
 }
