@@ -35,6 +35,8 @@ public class PlayerMovement : MonoBehaviour
     private float platformExitDelay = 0.3f;
     private float platformExitTimer = 0f;
     private bool isPlayingSpecialAnimation = false;  // Flag for Steal/Search animations
+
+    private bool isInDialoguePoint = false;
     
     [Header("Roll Hitbox")]
     [SerializeField] private Vector2 rolledHitboxSize = new Vector2(0.8f, 0.8f);
@@ -80,6 +82,10 @@ public class PlayerMovement : MonoBehaviour
     {
         HandleMovement();
         canInteract = !isCurrentlyRolling && !playerIsCaught && !isCrouching;
+        if (isInDialoguePoint)
+        {
+            isMovementLocked = true;
+        }
     }
 
     void OnTriggerEnter2D(Collider2D collision)
@@ -88,6 +94,9 @@ public class PlayerMovement : MonoBehaviour
         {
             rollDirection *= -1f;
         }
+
+        if (collision.CompareTag("Dialogue"))
+            isInDialoguePoint = true;
     }
 
     void OnCollisionEnter2D(Collision2D collision)
@@ -115,21 +124,23 @@ public class PlayerMovement : MonoBehaviour
         isMovementLocked = false;
     }
 
-    public void WaitForMovementLock()
-    {
-        StartCoroutine(WaitToLock());
-    }
 
-    private IEnumerator WaitToLock()
-    {
-        yield return null;
-        while (animator.IsInTransition(0))
-            yield return null;
 
-        float clipLength = animator.GetCurrentAnimatorStateInfo(0).length;
-        yield return new WaitForSeconds(clipLength);
-        LockMovement();
-    }
+    // public void WaitForMovementLock()
+    // {
+    //     StartCoroutine(WaitToLock());
+    // }
+
+    // private IEnumerator WaitToLock()
+    // {
+    //     yield return null;
+    //     while (animator.IsInTransition(0))
+    //         yield return null;
+
+    //     float clipLength = animator.GetCurrentAnimatorStateInfo(0).length;
+    //     yield return new WaitForSeconds(clipLength);
+    //     LockMovement();
+    // }
 
     public void PlayStealAndUnlock()
     {
@@ -212,6 +223,11 @@ public class PlayerMovement : MonoBehaviour
             return true;
         
         return false;
+    }
+
+    public void ToggleIsInDialoguePoint(bool value)
+    {
+        isInDialoguePoint = value;
     }
 
     void HandleMovement()
