@@ -115,6 +115,22 @@ public class PlayerMovement : MonoBehaviour
         isMovementLocked = false;
     }
 
+    public void WaitForMovementLock()
+    {
+        StartCoroutine(WaitToLock());
+    }
+
+    private IEnumerator WaitToLock()
+    {
+        yield return null;
+        while (animator.IsInTransition(0))
+            yield return null;
+
+        float clipLength = animator.GetCurrentAnimatorStateInfo(0).length;
+        yield return new WaitForSeconds(clipLength);
+        LockMovement();
+    }
+
     public void PlayStealAndUnlock()
     {
         LockMovement();
