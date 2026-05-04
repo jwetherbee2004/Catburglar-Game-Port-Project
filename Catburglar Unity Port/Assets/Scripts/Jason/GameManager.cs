@@ -82,7 +82,6 @@ public class GameManager : MonoBehaviour
         }
         if (loot > 299 && !trigger_300 && SceneManager.GetActiveScene().name == "LevelOne")
         {
-            Debug.Log("POOOOOOOOOOOOOOOOOOOOOOOOOOP");
             trigger_300 = true;
             StartCoroutine(CreateDialogue(0));
         }

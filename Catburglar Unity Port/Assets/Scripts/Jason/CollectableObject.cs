@@ -25,6 +25,10 @@ public class CollectableObject : MonoBehaviour, IInteractable
         PlayerMovement pm = player.GetComponent<PlayerMovement>();
         pm.PlayStealAndUnlock();
         player.ForceUIChange();
+        if (triggersText)
+        {
+            GameManager.Instance.DialogueHelper();
+        }
     }
 
 }
