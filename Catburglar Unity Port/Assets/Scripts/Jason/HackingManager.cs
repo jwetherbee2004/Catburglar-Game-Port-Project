@@ -68,6 +68,7 @@ public class HackingManager : MonoBehaviour
                 GameManager.Instance.DisplayObjective("Secondary objective complete.");
                 StopCoroutine(HackTimer());
                 sceneHackable.doneInteracting = true;
+                StartCoroutine(GameManager.Instance.CreateDialogue(1));
                 return;
             }
             foreach (GameObject obj in arrowObjects)

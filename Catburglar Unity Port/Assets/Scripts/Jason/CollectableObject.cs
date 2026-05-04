@@ -7,6 +7,7 @@ public class CollectableObject : MonoBehaviour, IInteractable
     [SerializeField] int value = 0;
     public GameObject Object => gameObject;
     public Transform player;
+    public bool triggersText = false;
 
     void Awake()
     {
@@ -24,6 +25,7 @@ public class CollectableObject : MonoBehaviour, IInteractable
         PlayerMovement pm = player.GetComponent<PlayerMovement>();
         pm.PlayStealAndUnlock();
         player.ForceUIChange();
+        GameManager.Instance.DialogueHelper();
     }
 
 }

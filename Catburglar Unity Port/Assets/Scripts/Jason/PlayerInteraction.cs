@@ -114,6 +114,13 @@ public class PlayerInteraction : MonoBehaviour
 
     void OnTriggerStay2D(Collider2D other)
     {
+        if (uiObject.activeSelf)
+        {
+            uiShown = true;
+        } else
+        {
+            uiShown= false;
+        }
         var otherinteractable = other.GetComponent<DialoguePoint>();
         if (otherinteractable != null)
         {

@@ -33,6 +33,9 @@ public class GameManager : MonoBehaviour
     public static GameManager Instance;
     private bool isResettingLevel = false;    
     public TimeTracker timeTracker { get; private set; }
+    private bool trigger_300 = false;
+    private bool trigger_hack = false;
+    private bool trigger_vase = false;
 
     [Header("Audio")]
     private AudioSource audioSource;
@@ -76,6 +79,11 @@ public class GameManager : MonoBehaviour
             Eye1.gameObject.SetActive(false);
             Eye2.gameObject.SetActive(false);
             LightText.text = "IN SHADOW";
+        }
+        if (loot > 299 && !trigger_300 && SceneManager.GetActiveScene().name == "LevelOne")
+        {
+            trigger_300 = true;
+            StartCoroutine(CreateDialogue(0));
         }
     }
 
@@ -230,7 +238,13 @@ public class GameManager : MonoBehaviour
 
     private void DisplayObjective()
     {
-        goalText.text = "Steal at least $" + lootRequirements[level] + " worth of loot.";
+        if (SceneManager.GetActiveScene().name == "LevelOne")
+        {
+            goalText.text = "Steal at least $" + lootRequirements[level] + " worth of loot.";
+        } else
+        {
+            goalText.text = "Steal the vase.";
+        }
         StartCoroutine(ObjectiveAnimation());
     }
 
@@ -274,5 +288,18 @@ public class GameManager : MonoBehaviour
         {
             audioSource.PlayOneShot(levelReset);
         }
+    }
+
+    public IEnumerator CreateDialogue(int index)
+    {
+        yield return new WaitForSeconds(1.5f);
+        DialoguePoint newDialogue = Instantiate(spawnableDialogues[index]);
+        newDialogue.dialogueBox = dialogueObject;
+        newDialogue.transform.position = player.transform.position;
+    }
+
+    public void DialogueHelper()
+    {
+        StartCoroutine(GameManager.Instance.CreateDialogue(0));
     }
 }

@@ -6,7 +6,7 @@ public class DialoguePoint : MonoBehaviour, IInteractable
     public string InteractionText => "Skip";
     public bool used = false;
     [SerializeField] public string dialogueText;
-    [SerializeField] private GameObject dialogueBox;
+    [SerializeField] public GameObject dialogueBox;
     public GameObject Object => gameObject;
 
     private void Awake()
@@ -22,5 +22,10 @@ public class DialoguePoint : MonoBehaviour, IInteractable
         dialogueBox.SetActive(false);
         GetComponent<BoxCollider2D>().enabled = false;
         player.gameObject.GetComponent<PlayerMovement>().ToggleIsInDialoguePoint(false);
+    }
+
+    private void OnDestroy()
+    {
+        Debug.Log("DialoguePoint destroyed: " + gameObject.name);
     }
 }
