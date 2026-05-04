@@ -9,9 +9,11 @@ public class PlayerInteraction : MonoBehaviour
     private IInteractable currentInteractable;
     private bool uiShown = false;
     public bool inDialogue = false;
+    private AudioSource audioSource;
 
     void Awake()
     {
+        audioSource = GetComponent<AudioSource>();
         player = GameObject.FindGameObjectWithTag("Player")?.transform;
     }
 
@@ -24,6 +26,7 @@ public class PlayerInteraction : MonoBehaviour
             if (isDialogue != null)
             {
                 currentInteractable.Interact(this);
+                audioSource.Stop();
             }
             else if (!inDialogue)
             {
@@ -74,6 +77,7 @@ public class PlayerInteraction : MonoBehaviour
                 {
                     if (otherinteractable.Object != currentInteractable.Object)
                     {
+                        audioSource.PlayOneShot(otherinteractable.voiceLine);
                         currentInteractable = otherinteractable;
                         GameManager.Instance.DisplayDialogue(otherinteractable.dialogueText);
                         inDialogue = true;
@@ -81,6 +85,7 @@ public class PlayerInteraction : MonoBehaviour
                     }
                 } else
                 {
+                    audioSource.PlayOneShot(otherinteractable.voiceLine);
                     currentInteractable = otherinteractable;
                     GameManager.Instance.DisplayDialogue(otherinteractable.dialogueText);
                     inDialogue = true;

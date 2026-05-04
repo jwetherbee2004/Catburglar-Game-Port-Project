@@ -151,3 +151,4 @@ MonoBehaviour:
   dialogueText: Holding out on Uncle Sam, are we, Chandler? Cab drivers pay more
     tax than that.
   dialogueBox: {fileID: 0}
+  voiceLine: {fileID: 8300000, guid: 11774ff18343e184689b4e482855a2ca, type: 3}

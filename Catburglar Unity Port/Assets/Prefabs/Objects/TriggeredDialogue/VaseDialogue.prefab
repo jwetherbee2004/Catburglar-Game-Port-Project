@@ -151,3 +151,4 @@ MonoBehaviour:
   dialogueText: Well, aren't you a pretty little thing. Lighter than I was expecting,
     too...
   dialogueBox: {fileID: 0}
+  voiceLine: {fileID: 8300000, guid: 754a13729d318c5438b888c5775b7770, type: 3}

@@ -151,3 +151,4 @@ MonoBehaviour:
   dialogueText: That should be enough. I can see myself out... or I can stick around
     and really make this worth my while
   dialogueBox: {fileID: 0}
+  voiceLine: {fileID: 8300000, guid: 836a6f42a93de104b9ca1923d68d7795, type: 3}

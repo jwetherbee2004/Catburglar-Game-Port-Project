@@ -4297,11 +4297,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8113719651079510958, guid: 234ca6ff3453a95409ad82e9a5647947, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 26.43
+      value: -6.6473465
       objectReference: {fileID: 0}
     - target: {fileID: 8113719651079510958, guid: 234ca6ff3453a95409ad82e9a5647947, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 19.84
+      value: -0.49882507
       objectReference: {fileID: 0}
     - target: {fileID: 8113719651079510958, guid: 234ca6ff3453a95409ad82e9a5647947, type: 3}
       propertyPath: m_LocalPosition.z
@@ -22502,6 +22502,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3198261905746581205, guid: 53b3d2396ccf3404983f31f3ac86439b, type: 3}
+      propertyPath: voiceLine
+      value: 
+      objectReference: {fileID: 8300000, guid: f91c4aff61b844346a458fa4f2792f61, type: 3}
+    - target: {fileID: 3198261905746581205, guid: 53b3d2396ccf3404983f31f3ac86439b, type: 3}
       propertyPath: dialogueBox
       value: 
       objectReference: {fileID: 1362767494}
@@ -23037,6 +23041,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3198261905746581205, guid: 53b3d2396ccf3404983f31f3ac86439b, type: 3}
+      propertyPath: voiceLine
+      value: 
+      objectReference: {fileID: 8300000, guid: c0bc59bd2f38ac044b999040ec3c962f, type: 3}
     - target: {fileID: 3198261905746581205, guid: 53b3d2396ccf3404983f31f3ac86439b, type: 3}
       propertyPath: dialogueBox
       value: 
@@ -28696,6 +28704,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3198261905746581205, guid: 53b3d2396ccf3404983f31f3ac86439b, type: 3}
+      propertyPath: voiceLine
+      value: 
+      objectReference: {fileID: 8300000, guid: 40dfc1b5a50aa0f4bbb2ca8da1338163, type: 3}
     - target: {fileID: 3198261905746581205, guid: 53b3d2396ccf3404983f31f3ac86439b, type: 3}
       propertyPath: dialogueBox
       value: 

@@ -7,6 +7,7 @@ public class DialoguePoint : MonoBehaviour, IInteractable
     public bool used = false;
     [SerializeField] public string dialogueText;
     [SerializeField] public GameObject dialogueBox;
+    [SerializeField] public AudioClip voiceLine;
     public GameObject Object => gameObject;
 
     private void Awake()

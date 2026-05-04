@@ -151,3 +151,4 @@ MonoBehaviour:
   dialogueText: Oh, Harry... still young at heart, I see. But your selfie game needs
     work. I'll just take a copy of these; they'll make for good insurance.
   dialogueBox: {fileID: 0}
+  voiceLine: {fileID: 8300000, guid: 458bc0a068737d04d98e60ccd140dcb5, type: 3}
