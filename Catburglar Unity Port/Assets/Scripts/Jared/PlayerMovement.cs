@@ -6,7 +6,7 @@ public class PlayerMovement : MonoBehaviour
     private Rigidbody2D rb;
     [SerializeField] private Rigidbody2D.SlideMovement m_slideMovement = new();
 
-    private Animator animator;
+    public Animator animator;
     private SpriteRenderer spriteRenderer;
     public float moveSpeed = 5f;
     public float rollDistance = 8f;
@@ -92,6 +92,11 @@ public class PlayerMovement : MonoBehaviour
         {
             isMovementLocked = true;
             animator.SetBool("isMoving", false);
+            animator.SetBool("isRolling", false);
+            animator.SetBool("isCrouching", false);
+
+            isCurrentlyRolling = false;
+            isCrouching = false;
         }
     }
 

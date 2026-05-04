@@ -82,6 +82,7 @@ public class GameManager : MonoBehaviour
         }
         if (loot > 299 && !trigger_300 && SceneManager.GetActiveScene().name == "LevelOne")
         {
+            Debug.Log("POOOOOOOOOOOOOOOOOOOOOOOOOOP");
             trigger_300 = true;
             StartCoroutine(CreateDialogue(0));
         }
@@ -294,6 +295,9 @@ public class GameManager : MonoBehaviour
     {
         yield return new WaitForSeconds(1.5f);
         DialoguePoint newDialogue = Instantiate(spawnableDialogues[index]);
+        player.animator.SetBool("isMoving", false);
+        player.animator.SetBool("isRolling", false);
+        player.animator.SetBool("isCrouching", false);
         newDialogue.dialogueBox = dialogueObject;
         newDialogue.transform.position = player.transform.position;
     }

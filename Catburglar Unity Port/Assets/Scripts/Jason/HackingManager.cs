@@ -44,7 +44,6 @@ public class HackingManager : MonoBehaviour
     {
         if (!ongoing)
         {
-            audioSource.Stop();
             return;
         }
         int direction = -1;
@@ -161,6 +160,7 @@ public class HackingManager : MonoBehaviour
             StartCoroutine(HackTimer());
         } else
         {
+            audioSource.Stop();
             player.UnlockMovement();
             hackingUI.SetActive(false);
         }

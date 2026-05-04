@@ -4297,11 +4297,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8113719651079510958, guid: 234ca6ff3453a95409ad82e9a5647947, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -6.6473465
+      value: -6.46
       objectReference: {fileID: 0}
     - target: {fileID: 8113719651079510958, guid: 234ca6ff3453a95409ad82e9a5647947, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.49882507
+      value: -0.6
       objectReference: {fileID: 0}
     - target: {fileID: 8113719651079510958, guid: 234ca6ff3453a95409ad82e9a5647947, type: 3}
       propertyPath: m_LocalPosition.z
@@ -4718,6 +4718,10 @@ PrefabInstance:
     - target: {fileID: 7783771181726689422, guid: af4141893bf59174a8bc45804a8e7848, type: 3}
       propertyPath: m_Name
       value: MainRoomLight2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7783771181726689422, guid: af4141893bf59174a8bc45804a8e7848, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8330506821463733952, guid: af4141893bf59174a8bc45804a8e7848, type: 3}
       propertyPath: m_Points.m_Paths.Array.data[0].Array.size
