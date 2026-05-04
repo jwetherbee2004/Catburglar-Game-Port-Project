@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 6296907578460188699}
   - component: {fileID: 3316614543179811258}
   - component: {fileID: 1759971727767622280}
+  - component: {fileID: 5707651623065361292}
   m_Layer: 0
   m_Name: TipPoint
   m_TagString: Untagged
@@ -134,3 +135,18 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &5707651623065361292
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2927448680420079640}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f0c6a6b1392ec3b4f98c93c5c7882930, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  used: 0
+  tipText: 
+  tipBox: {fileID: 0}

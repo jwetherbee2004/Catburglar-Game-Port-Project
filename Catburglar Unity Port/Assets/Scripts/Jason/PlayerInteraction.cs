@@ -121,6 +121,10 @@ public class PlayerInteraction : MonoBehaviour
             {
                 currentInteractable = otherinteractable;
                 interactText.text = currentInteractable.InteractionText;
+                if (!uiShown)
+                {
+                    ShowHideUI();
+                }
                 return;
             }
         }

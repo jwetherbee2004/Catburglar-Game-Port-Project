@@ -1,4 +1,5 @@
 using System.Collections;
+using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.Rendering;
@@ -21,6 +22,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] private float lootDisplayDistance = 24f;
     [SerializeField] private Vector2 lootVisiblePosition = new Vector2(10, 50);
     [SerializeField] private float lootDisplayHoldTime = 1f;
+    [SerializeField] private List<DialoguePoint> spawnableDialogues;
     
     private int loot = 0;
     private int level = 0;
